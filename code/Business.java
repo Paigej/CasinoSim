@@ -8,13 +8,13 @@
  *
  ******************************************************************************/
 
-public class Business {
+public abstract class Business {
 	private int id;
 	private String passcode;
+	private boolean IsPrivate;
 
 	public String name;
 	public boolean open;
-	public boolean IsPrivate;
 
 	Business(String name) {
 		this.name = name;
@@ -24,13 +24,19 @@ public class Business {
 		this.id = 2;
 	}
 
+	public boolean getIsPrivate() {
+		return IsPrivate;
+	}
+
 	public int getId() {
 		return id;
 	}
 
-    public static void main(String[] args) {
-        Business myCasino = new Business("Flamingo");
-        System.out.println(myCasino.name);
-    }
+	public void changeIsPrivate() {
+		IsPrivate = !IsPrivate;
+	}
 
+	public void addPasscode(String str) {
+		passcode = str;
+	}
 }
