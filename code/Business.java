@@ -39,4 +39,8 @@ public abstract class Business {
 	public void addPasscode(String str) {
 		passcode = str;
 	}
+
+	public boolean validatePasscode(String givenPasscode) {
+		return (givenPasscode == passcode);
+	}
 }
