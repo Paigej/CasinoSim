@@ -11,13 +11,13 @@ public abstract class Business {
 	private int id;
 	private String passcode;
 	private boolean IsPrivate;
+	private String ownerID;
 
 	public String name;
 	public boolean open;
 
-	//Business(String name) {
-	Business() {
-		//this.name = name;
+	Business(String name, String ownerID) {
+		this.name = name;
 		this.open = true;
 		this.IsPrivate = false;
 		this.passcode = "";

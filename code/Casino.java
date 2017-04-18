@@ -12,12 +12,19 @@ import java.util.*;
 public class Casino extends Business {
 	private ArrayList<String> gameIDList;
 	private ArrayList<String> users;
-	private String ownerID;
 
 	public double income;
 	public double loss;
 
 	// Insert constructor here
+
+	Casino(String name, String ownerID) {
+		super(name, ownerID);
+		this.gameIDList = new ArrayList<String>();
+		this.gameIDList = new ArrayList<String>();
+		this.income = 0.0;
+		this.loss = 0.0;
+	}
 
 	public ArrayList<String> getUserList() {
 		return users;
