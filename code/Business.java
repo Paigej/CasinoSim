@@ -2,7 +2,6 @@
  *  Author(s):    Derek Gorthy
  *
  *  Compilation:  javac Business.java
- *  Execution:    java Business
  *  
  *  Implements the Business class, the foundation to the casino structure.
  *
@@ -16,8 +15,9 @@ public abstract class Business {
 	public String name;
 	public boolean open;
 
-	Business(String name) {
-		this.name = name;
+	//Business(String name) {
+	Business() {
+		//this.name = name;
 		this.open = true;
 		this.IsPrivate = false;
 		this.passcode = "";
