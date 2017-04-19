@@ -36,6 +36,10 @@ public abstract class Business {
 		IsPrivate = !IsPrivate;
 	}
 
+	public void changeOpenStatus() {
+		open = !open;
+	}
+
 	public void addPasscode(String str) {
 		passcode = str;
 	}

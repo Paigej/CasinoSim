@@ -23,7 +23,7 @@ public abstract class User {
 		return balance;
 	}
 
-	public String validatePassword(String password_entered) {
+	public boolean validatePassword(String password_entered) {
 		return (password == password_entered);
 	}
 
