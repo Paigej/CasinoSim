@@ -14,4 +14,9 @@ public class GameDecorator implements Game {
 	GameDecorator(Game g) {
 		this.game = g;
 	}
+
+	@Override
+		public void playGame(String playerID, double bet) {
+		System.out.print("It looks like playGame was not implemented correctly, in GameDecorator.")
+	}
 }
