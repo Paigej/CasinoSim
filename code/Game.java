@@ -29,6 +29,6 @@ public abstract class Game {
 	}
 
 	public void playGame(String playerID, double bet) {
-		System.out.print("It looks like playGame was not implemented correctly.")
+		System.out.print("It looks like playGame was not implemented correctly, in Game.")
 	}
 }
