@@ -1,5 +1,5 @@
 /******************************************************************************
- *  Author(s):    Derek Gorthy
+ *  Author(s):    Derek Gorthy, Michael Condon
  *
  *  Compilation:  javac GameDecorator.java
  *  
@@ -7,7 +7,7 @@
  *
  ******************************************************************************/
 
-public class GameDecorator implements Game {
+public class GameDecorator extends Game {
 
 	protected Game game;
 
@@ -17,6 +17,6 @@ public class GameDecorator implements Game {
 
 	@Override
 		public void playGame(String playerID, double bet) {
-		System.out.print("It looks like playGame was not implemented correctly, in GameDecorator.")
+		System.out.print("It looks like playGame was not implemented correctly, in GameDecorator.");
 	}
 }

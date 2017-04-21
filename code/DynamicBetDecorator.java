@@ -1,5 +1,5 @@
 /******************************************************************************
- *  Author(s):    Derek Gorthy
+ *  Author(s):    Derek Gorthy, Michael Condon
  *
  *  Compilation:  javac DynamicBetDecorator.java
  *  
@@ -7,7 +7,7 @@
  *
  ******************************************************************************/
 
-public class DynamicBetDecorator implements GameDecorator {
+public class DynamicBetDecorator extends GameDecorator {
 
 	public double minBet;
 	public double maxBet;
@@ -18,7 +18,7 @@ public class DynamicBetDecorator implements GameDecorator {
 		this.maxBet = max;
 	}
 
-	public bool checkBet(double bet) {
+	public boolean checkBet(double bet) {
 		return (minBet < bet && bet < maxBet);
 	}
 

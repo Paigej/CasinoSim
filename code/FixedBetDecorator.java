@@ -1,5 +1,5 @@
 /******************************************************************************
- *  Author(s):    Derek Gorthy
+ *  Author(s):    Derek Gorthy, Michael COndon
  *
  *  Compilation:  javac FixedBetDecorator.java
  *  
@@ -7,7 +7,7 @@
  *
  ******************************************************************************/
 
-public class FixedBetDecorator implements GameDecorator {
+public class FixedBetDecorator extends GameDecorator {
 
 	public double fixedBetAmount;
 
@@ -16,7 +16,7 @@ public class FixedBetDecorator implements GameDecorator {
 		this.fixedBetAmount = bet;
 	}
 
-	public bool checkBet(double bet) {
+	public boolean checkBet(double bet) {
 		return (fixedBetAmount == bet);
 	}
 

@@ -1,5 +1,5 @@
 /******************************************************************************
- *  Author(s):    Derek Gorthy
+ *  Author(s):    Derek Gorthy, Michael Condon
  *
  *  Compilation:  javac ColorGameDecorator.java
  *  
@@ -9,16 +9,17 @@
 
 import java.util.*;
 
-public class ColorGameDecorator implements GameDecorator {
+public class ColorGameDecorator extends GameDecorator {
 
 	private ArrayList<String> choiceList;
 
+	//What is this supposed to be doing?
 	DynamicBetDecorator(Game g, ArrayList<String> choice) {
 		super(g);
 		this.choiceList = choice;
 	}
 
-	public bool checkChoice(double bet) {
+	public boolean checkChoice(double bet) {
 		return (choiceList.contains(bet));
 	}
 

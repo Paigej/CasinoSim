@@ -1,5 +1,5 @@
 /******************************************************************************
- *  Author(s):    Derek Gorthy
+ *  Author(s):    Derek Gorthy, Michael Condon
  *
  *  Compilation:  javac Game.java
  *  
@@ -18,6 +18,8 @@ public abstract class Game {
 	public int seatsAvailable;
 	public int seatsOccupied;
 
+	Game(){};
+	
 	Game(String id, String casinoID, String name) {
 		this.id = id;
 		this.casinoID = casinoID;
@@ -29,6 +31,6 @@ public abstract class Game {
 	}
 
 	public void playGame(String playerID, double bet) {
-		System.out.print("It looks like playGame was not implemented correctly, in Game.")
+		System.out.print("It looks like playGame was not implemented correctly, in Game.");
 	}
 }

@@ -1,5 +1,5 @@
 /******************************************************************************
- *  Author(s):    Derek Gorthy
+ *  Author(s):    Derek Gorthy, Michael Condon
  *
  *  Compilation:  javac SimpleGame.java
  *  
@@ -7,7 +7,7 @@
  *
  ******************************************************************************/
 
-public class SimpleGame implements Game {
+public class SimpleGame extends Game {
 
 	SimpleGame(String id, String casinoID, String name) {
 		super(id, casinoID, name);
@@ -15,6 +15,6 @@ public class SimpleGame implements Game {
 
 	@Override
 	public void playGame(String playerID, double bet) {
-		System.out.print("It looks like playGame was not implemented correctly, in SimpleGame.")
+		System.out.print("It looks like playGame was not implemented correctly, in SimpleGame.");
 	}
 }
