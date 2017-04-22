@@ -10,6 +10,10 @@
 public class GameDecorator extends Game {
 
 	protected Game game;
+	
+	GameDecorator(){
+		this.GameDecorator(Game);
+	}
 
 	GameDecorator(Game g) {
 		this.game = g;

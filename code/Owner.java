@@ -13,6 +13,8 @@ public class Owner extends User {
 	private String activeBusinessID;
 
 	public ArrayList<String> businesses;
+	
+
 
 	Owner(String username, String password, double balance) {
 		super(username, password, balance);
