@@ -46,12 +46,42 @@ public class MainController {
 		}
 	}
 	
-	public static void logIn(){
-		
+	public static void getLogInInfo(){
+		System.out.print("Username: ");
+		scan = new Scanner(System.in);
+		String username = scan.nextLine();
+		System.out.print("Password: ");
+		scan = new Scanner(System.in);
+		String password = scan.nextLine();
+		if (verifyLogin(username, password) > 0)
+		{
+			System.out.println("Log in successful");
+		}
+		else
+		{
+			System.out.println("Log in unsuccessful");
+			getLogInInfo();
+		}
+
+	}
+	
+	//Need to figure out the database stuff for this function 
+	public static int verifyLogin(String username, String password){
+		/*
+		 * 
+		 *Database verification here
+		 */
+		return 1;
 	}
 
 	public static void signUp(){
-		
+		System.out.print("Username: ");
+		scan = new Scanner(System.in);
+		String username = scan.nextLine();
+		System.out.print("Password: ");
+		scan = new Scanner(System.in);
+		String password = scan.nextLine();
+
 	}
 	
 	public static void main(String[] args) {
@@ -59,7 +89,7 @@ public class MainController {
 		int nextView = choseLogIn();
 		if (nextView == 1)
 		{
-			logIn();
+			getLogInInfo();
 		}
 		else if (nextView == 2)
 		{
