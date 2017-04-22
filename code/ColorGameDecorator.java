@@ -12,13 +12,20 @@ import java.util.*;
 public class ColorGameDecorator extends GameDecorator {
 
 	private ArrayList<String> choiceList;
-
-	//What is this supposed to be doing?
-	DynamicBetDecorator(Game g, ArrayList<String> choice) {
+	
+	ColorGameDecorator(Game g, ArrayList<String> choice) {
 		super(g);
 		this.choiceList = choice;
 	}
 
+	/*
+	 * Was this a copy-paste mistake? and is the above method what you were trying to do?
+	 * 
+	DynamicBetDecorator(Game g, ArrayList<String> choice) {
+		super(g);
+		this.choiceList = choice;
+	}
+*/
 	public boolean checkChoice(double bet) {
 		return (choiceList.contains(bet));
 	}

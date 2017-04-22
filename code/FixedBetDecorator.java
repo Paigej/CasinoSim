@@ -1,5 +1,5 @@
 /******************************************************************************
- *  Author(s):    Derek Gorthy, Michael COndon
+ *  Author(s):    Derek Gorthy, Michael Condon
  *
  *  Compilation:  javac FixedBetDecorator.java
  *  
@@ -11,11 +11,20 @@ public class FixedBetDecorator extends GameDecorator {
 
 	public double fixedBetAmount;
 
-	DynamicBetDecorator(Game g, double bet) {
+	FixedBetDecorator(Game g, double bet) {
 		super(g);
 		this.fixedBetAmount = bet;
 	}
-
+	
+	/*
+	 * Was this a copy-paste mistake? and is the above method what you were trying to do?
+	 * 
+	 * DynamicBetDecorator(Game g, double bet) {
+		super(g);
+		this.fixedBetAmount = bet;
+	}
+*/
+	
 	public boolean checkBet(double bet) {
 		return (fixedBetAmount == bet);
 	}

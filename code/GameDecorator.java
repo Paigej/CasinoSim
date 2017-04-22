@@ -9,14 +9,14 @@
 
 public class GameDecorator extends Game {
 
-	protected Game game;
+	protected static Game game;
 	
 	GameDecorator(){
-		this.GameDecorator(Game);
+		this(game);
 	}
 
 	GameDecorator(Game g) {
-		this.game = g;
+		GameDecorator.game = g;
 	}
 
 	@Override
