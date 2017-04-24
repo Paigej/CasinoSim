@@ -1,17 +1,26 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
+
 
 /******************************************************************************
  *  Author(s):    Michael Condon
  *
  *  Compilation:  javac MainController.java
  *  
- *  The primary driver for the CasinoSimulator
+ *  The primary driver for the CasinoSimulator (Command Line UI driver) **Not listed in class 
+ *  	because it is not necessarily intended for WebPage UI
  *
  ******************************************************************************/
 public class MainController {
 	
 	//Object used to get input from user (Command Line UI)
 	private static Scanner scan;
+	
+	List<Owner> Owners = new ArrayList<Owner>();
+	List<Player> Players = new ArrayList<Player>();
+
+
 
 	/*
 	 * Initial message to user
@@ -150,7 +159,7 @@ public class MainController {
 	 * 
 	 * Post: createOwner() or createPlayer() is called
 	 */
-	public static void signUp(){
+	public static int signUp(){
 		System.out.print("Email: ");
 		scan = new Scanner(System.in);
 		String userEmail = scan.nextLine();
@@ -169,17 +178,19 @@ public class MainController {
 			if (choseUserType() == 1)
 			{
 				createOwner(userEmail, username, password);
+				return 1;
 			}
 			else 
 			{
 				createPlayer(userEmail, username, password);
+				return 2;
 			}
 
 		}
 		else
 		{
 			System.out.println("Passwords do not match. Try again.");
-			signUp();
+			return signUp();
 		}
 
 	}
@@ -195,7 +206,7 @@ public class MainController {
 		}
 		else if (nextView == 2)
 		{
-			signUp();
+			int userType = signUp();
 		}
 		
 	}
