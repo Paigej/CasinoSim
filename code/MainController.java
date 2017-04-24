@@ -99,6 +99,9 @@ public class MainController {
 	}
 
 	public static void signUp(){
+		System.out.print("Email: ");
+		scan = new Scanner(System.in);
+		String userEmail = scan.nextLine();
 		System.out.print("Username: ");
 		scan = new Scanner(System.in);
 		String username = scan.nextLine();
@@ -128,6 +131,8 @@ public class MainController {
 		}
 
 	}
+	
+	
 	
 	public static void main(String[] args) {
 		printIntroMessage();
