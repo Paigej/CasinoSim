@@ -10,10 +10,11 @@ import java.util.Scanner;
  ******************************************************************************/
 public class MainController {
 	
+	//Object used to get input from user (Command Line UI)
 	private static Scanner scan;
 
 	/*
-	 * Intial message to user
+	 * Initial message to user
 	 */
 	public static void printIntroMessage(){
 		System.out.println("Welcome to CasinoSim!");
@@ -21,11 +22,15 @@ public class MainController {
 	}
 
 	/*
+	 * Pre-req: NA 
+	 * 
 	 * Allows user to select whether they are signing up or logging in
 	 * will repeat until user has chosen a valid option
 	 * returns a number indicating user's selection
 	 * 1 for log in screen
 	 * 2 for sign up
+	 * 
+	 * Post: User is taken to respective credentials prompt (through main)
 	 */
 	public static int choseLogIn(){
 		scan = new Scanner(System.in);
@@ -46,6 +51,14 @@ public class MainController {
 		}
 	}
 	
+	/*
+	 * Pre-req: User has chosen to create a new account
+	 * 
+	 * Allows user to define whether they are a Casino Owner or Player
+	 * Will recursively repeat until there is a valid response (Stack overflow attack not protected)
+	 * 
+	 * Post: Controller now knows what type of user to create
+	 */
 	public static int choseUserType(){
 		scan = new Scanner(System.in);
 		String userSelection = scan.nextLine();// Scans the next token of the input as a String.
@@ -64,6 +77,15 @@ public class MainController {
 			return choseUserType();
 		}
 	}
+	
+	/*
+	 * Pre-req: User is not yet defined in system, and user has chosen to log in
+	 * 
+	 * Gathers required log in info from user to log in
+	 * Will recursively repeat until valid response
+	 * 
+	 * post: Player is brought to respective View
+	 */
 	
 	public static void getLogInInfo(){
 		System.out.print("Username: ");
@@ -93,11 +115,41 @@ public class MainController {
 		return 1;
 	}
 	
-	public static int addProfileToDatabase(String username, String password)
+	/*
+	 * Pre-req: signUp() has gathered the required info from user and has confirmed the new user 
+	 * 		desires to be an Owner
+	 * 
+	 * Creates new Owner with the information that the user has provided
+	 * 
+	 * Post: New Owner object is created, and user is taken to Owner screen
+	 */
+	public static void createOwner(String email, String Username, String Password)
 	{
-		return 1;
+		
+	}
+	
+	/*
+	 * Pre-req: signUp() has gathered the required info from user and has confirmed the new user 
+	 * 		desires to be an Player
+	 * 
+	 * Creates new Player with the information that the user has provided
+	 * 
+	 * Post: New Player object is created, and user is taken to Owner screen
+	 */
+	
+	public static void createPlayer(String email, String Username, String Password)
+	{
+		
 	}
 
+	/*
+	 * Pre-req: User has chosen to sign up in choseLogIn()
+	 * 
+	 * Gathers info from User that is required for a new account to be created
+	 * Recursively repeats until valid info
+	 * 
+	 * Post: createOwner() or createPlayer() is called
+	 */
 	public static void signUp(){
 		System.out.print("Email: ");
 		scan = new Scanner(System.in);
@@ -116,11 +168,11 @@ public class MainController {
 			System.out.println("Would you like to play as an Owner or Player?");
 			if (choseUserType() == 1)
 			{
-				System.out.println("User chose Owner");
+				createOwner(userEmail, username, password);
 			}
 			else 
 			{
-				System.out.println("User chose player");
+				createPlayer(userEmail, username, password);
 			}
 
 		}
