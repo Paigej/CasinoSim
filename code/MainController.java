@@ -46,6 +46,25 @@ public class MainController {
 		}
 	}
 	
+	public static int choseUserType(){
+		scan = new Scanner(System.in);
+		String userSelection = scan.nextLine();// Scans the next token of the input as a String.
+		
+		if (userSelection.indexOf("Owner") != -1 || userSelection.indexOf("owner") != -1)
+		{
+			return 1;
+		}
+		else if (userSelection.indexOf("Player") != -1 || userSelection.indexOf("player") != -1)
+		{
+			return 2;
+		}
+		else
+		{
+			System.out.println("Please type 'Owner' or 'Player'");
+			return choseUserType();
+		}
+	}
+	
 	public static void getLogInInfo(){
 		System.out.print("Username: ");
 		scan = new Scanner(System.in);
@@ -73,6 +92,11 @@ public class MainController {
 		 */
 		return 1;
 	}
+	
+	public static int addProfileToDatabase(String username, String password)
+	{
+		return 1;
+	}
 
 	public static void signUp(){
 		System.out.print("Username: ");
@@ -81,6 +105,27 @@ public class MainController {
 		System.out.print("Password: ");
 		scan = new Scanner(System.in);
 		String password = scan.nextLine();
+		System.out.print("Confirm Password: ");
+		scan = new Scanner(System.in);
+		String confirmedPassword = scan.nextLine();
+		if (confirmedPassword.equals(password))
+		{
+			System.out.println("Would you like to play as an Owner or Player?");
+			if (choseUserType() == 1)
+			{
+				System.out.println("User chose Owner");
+			}
+			else 
+			{
+				System.out.println("User chose player");
+			}
+
+		}
+		else
+		{
+			System.out.println("Passwords do not match. Try again.");
+			signUp();
+		}
 
 	}
 	
