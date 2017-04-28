@@ -47,4 +47,12 @@ public abstract class Business {
 	public boolean validatePasscode(String givenPasscode) {
 		return (givenPasscode == passcode);
 	}
+
+	public String getOwnerID() {
+		return ownerID;
+	}
+
+	public void setOwnerID(String ownerID) {
+		this.ownerID = ownerID;
+	}
 }
