@@ -22,7 +22,7 @@ public abstract class Game {
 	
 	Game(String id, String casinoID, String name) {
 		this.id = id;
-		this.casinoID = casinoID;
+		this.setCasinoID(casinoID);
 		this.name = name;
 	}
 
@@ -32,5 +32,13 @@ public abstract class Game {
 
 	public void playGame(String playerID, double bet) {
 		System.out.print("It looks like playGame was not implemented correctly, in Game.");
+	}
+
+	public String getCasinoID() {
+		return casinoID;
+	}
+
+	public void setCasinoID(String casinoID) {
+		this.casinoID = casinoID;
 	}
 }
