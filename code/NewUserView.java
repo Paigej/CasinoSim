@@ -171,7 +171,11 @@ public class NewUserView {
 
 	}
 	
-	
+	/*
+	 * 
+	 * You can think of this as the "main" of the NewUserView
+	 * 
+	 */
 	
 	public static void displayView() 
 	{

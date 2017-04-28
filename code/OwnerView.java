@@ -69,7 +69,7 @@ public class OwnerView
 		String userSelection = scan.nextLine();// Scans the next token of the input as a String.
 		if (userSelection.indexOf("edit") != -1 || userSelection.indexOf("Edit") != -1)
 		{
-			System.out.println("Please type the name of the business:");
+			choseABusinessToEdit();
 		}
 		else if (userSelection.indexOf("Buy") != -1 || userSelection.indexOf("buy") != -1)
 		{
@@ -79,6 +79,63 @@ public class OwnerView
 		{
 			System.out.println("Please type 'Edit' or 'Buy'");
 			displayManageBusinessOptions();
+		}
+	}
+	
+	/*
+	 * pre-req: user has chosen to edit one of their current businesses
+	 * 
+	 * Displays list of businesses and prompts user to enter a business name.
+	 * Will repeat until user has entered a valid response
+	 * If there are no businesses user is asked to buy one
+	 * if user says yes we are taken to buyBusiness screen
+	 * if no we are taken back to manage business screen
+	 * 
+	 * post: BuyBusiness() is called or manage business screen is displayed
+	 * 
+	 */
+	
+	public void choseABusinessToEdit()
+	{
+		if (userBusinesses.size() == 0)
+		{
+			System.out.println("You have no businesses. Would you like to buy one?");
+			boolean validResponse = false;
+			while (validResponse == false)
+			{
+				scan = new Scanner(System.in);
+				String userDecision = scan.nextLine();
+				if (userDecision.indexOf("Y") != -1 || userDecision.indexOf("y") != -1)
+				{
+					System.out.println("User is buying a business");
+					validResponse = true;
+				}
+				else if (userDecision.indexOf("N") != -1 || userDecision.indexOf("n") != -1)
+				{
+					validResponse = true;
+					displayManageBusinessScreen();
+					displayManageBusinessOptions();
+					
+				}
+				else
+				{
+					System.out.println("Please type 'Yes' or 'No'");
+				}
+			}
+		}
+		else
+		{
+			System.out.println("Please type the name of the business:");
+			for(int i = 0; i < userBusinesses.size(); i = i + 1) 
+			{
+				System.out.println(userBusinesses.get(i).name +" | " + 
+						userBusinesses.get(i).getClass() + " | " + userBusinesses.get(i).getNetGain()
+						+ " | " + userBusinesses.get(i).open + " | " +
+						userBusinesses.get(i).getIsPrivate() + " | " + userBusinesses.get(i).getPasscode());
+			}
+			scan = new Scanner(System.in);
+			String businessToBeEdited = scan.nextLine();
+			System.out.println(businessToBeEdited);
 		}
 	}
 	
