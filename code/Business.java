@@ -12,6 +12,7 @@ public abstract class Business {
 	private String passcode;
 	private boolean IsPrivate;
 	private String ownerID;
+	private double netGain;
 
 	public String name;
 	public boolean open;
@@ -54,5 +55,21 @@ public abstract class Business {
 
 	public void setOwnerID(String ownerID) {
 		this.ownerID = ownerID;
+	}
+
+	public double getNetGain() {
+		return netGain;
+	}
+
+	public void setNetGain(double netGain) {
+		this.netGain = netGain;
+	}
+	
+	public String getPasscode() {
+		return passcode;
+	}
+
+	public void setPasscode(String passcode) {
+		this.passcode = passcode;
 	}
 }

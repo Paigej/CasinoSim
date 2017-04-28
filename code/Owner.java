@@ -12,14 +12,16 @@ import java.util.*;
 public class Owner extends User {
 	private String activeBusinessID;
 
-	public ArrayList<String> businesses;
+	public ArrayList<Business> businesses;
 	
 
 
 	Owner(String username, String password, String email) {
 		super(username, password, 500000.0, email);
-		this.businesses = new ArrayList<String>();
+		this.businesses = new ArrayList<Business>();
 	}
+	
+	
 
 	// change to private
 	//public void removeUser(String user) {
@@ -34,6 +36,18 @@ public class Owner extends User {
 	// change to private
 	//public void sellBusiness(String busType, String busName){
 	//}
+
+	public ArrayList<Business> getBusinesses() {
+		return businesses;
+	}
+
+
+
+	public void setBusinesses(ArrayList<Business> businesses) {
+		this.businesses = businesses;
+	}
+
+
 
 	public String getBusinessID() {
 		return activeBusinessID;
