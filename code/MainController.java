@@ -124,38 +124,14 @@ public class MainController {
 		return 1;
 	}
 	
-	/*
-	 * Pre-req: signUp() has gathered the required info from user and has confirmed the new user 
-	 * 		desires to be an Owner
-	 * 
-	 * Creates new Owner with the information that the user has provided
-	 * 
-	 * Post: New Owner object is created, and user is taken to Owner screen
-	 */
-	public static void createOwner(String email, String Username, String Password)
-	{
-		
-	}
 	
-	/*
-	 * Pre-req: signUp() has gathered the required info from user and has confirmed the new user 
-	 * 		desires to be an Player
-	 * 
-	 * Creates new Player with the information that the user has provided
-	 * 
-	 * Post: New Player object is created, and user is taken to Owner screen
-	 */
-	
-	public static void createPlayer(String email, String Username, String Password)
-	{
-		
-	}
 
 	/*
 	 * Pre-req: User has chosen to sign up in choseLogIn()
 	 * 
 	 * Gathers info from User that is required for a new account to be created
 	 * Recursively repeats until valid info
+	 * Returns the instance of User created
 	 * 
 	 * Post: createOwner() or createPlayer() is called
 	 */

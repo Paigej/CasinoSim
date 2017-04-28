@@ -1,6 +1,11 @@
+import java.util.ArrayList;
 
 public class OwnerView 
 {
+	private String userID;
+	private double userBalance;
+	public ArrayList<Business> userBusinesses;
+	
 	OwnerView(Owner ownerInfo)
 	{
 		
