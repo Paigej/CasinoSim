@@ -189,6 +189,7 @@ public class MainController {
 				Owner newUserAsOwner = (Owner) newUser;
 				OwnerView ownersScreen = new OwnerView(newUserAsOwner);
 				ownersScreen.displayManageBusinessScreen();
+				ownersScreen.displayManageBusinessOptions();
 			}
 			else if (newUser instanceof Player)
 			{

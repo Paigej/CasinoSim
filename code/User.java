@@ -1,5 +1,5 @@
 /******************************************************************************
- *  Author(s):    Derek Gorthy
+ *  Author(s):    Derek Gorthy, Michael Condon
  *
  *  Compilation:  javac User.java
  *  
