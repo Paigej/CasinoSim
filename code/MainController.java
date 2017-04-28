@@ -197,7 +197,8 @@ public class MainController {
 	
 	
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) 
+	{
 		printIntroMessage();
 		int nextView = choseLogIn();
 		if (nextView == 1)
@@ -207,8 +208,16 @@ public class MainController {
 		else if (nextView == 2)
 		{
 			int userType = signUp();
-		}
-		
+			if (userType == 1)
+			{
+				OwnerView ownersScreen = new OwnerView();
+				ownersScreen.displayManageBusinessScreen();
+			}
+			else if (userType == 2)
+			{
+				System.out.println("Taken to Player Screen");
+			}
+		}	
 	}
 
 }
