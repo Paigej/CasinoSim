@@ -159,7 +159,7 @@ public class MainController {
 	 * 
 	 * Post: createOwner() or createPlayer() is called
 	 */
-	public static int signUp(){
+	public static User signUp(){
 		System.out.print("Email: ");
 		scan = new Scanner(System.in);
 		String userEmail = scan.nextLine();
@@ -177,13 +177,13 @@ public class MainController {
 			System.out.println("Would you like to play as an Owner or Player?");
 			if (choseUserType() == 1)
 			{
-				createOwner(userEmail, username, password);
-				return 1;
+				Owner newOwner = new Owner(username, password, userEmail);
+				return newOwner;
 			}
 			else 
 			{
-				createPlayer(userEmail, username, password);
-				return 2;
+				Player newPlayer = new Player(username, password, userEmail);
+				return newPlayer;
 			}
 
 		}
@@ -207,13 +207,14 @@ public class MainController {
 		}
 		else if (nextView == 2)
 		{
-			int userType = signUp();
-			if (userType == 1)
+			User newUser = signUp();
+			if (newUser instanceof Owner)
 			{
-				OwnerView ownersScreen = new OwnerView();
+				Owner newUserAsOwner = (Owner) newUser;
+				OwnerView ownersScreen = new OwnerView(newUserAsOwner);
 				ownersScreen.displayManageBusinessScreen();
 			}
-			else if (userType == 2)
+			else if (newUser instanceof Player)
 			{
 				System.out.println("Taken to Player Screen");
 			}

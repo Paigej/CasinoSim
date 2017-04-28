@@ -7,13 +7,13 @@
  *
  ******************************************************************************/
 
-import java.util.*;
+
 
 public class Player extends User {
 	
 
-	Player(String username, String password) {
-		super(username, password, 50000.0);
+	Player(String username, String password, String email) {
+		super(username, password, 50000.0, email);
 	}
 
 

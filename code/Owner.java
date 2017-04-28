@@ -16,8 +16,8 @@ public class Owner extends User {
 	
 
 
-	Owner(String username, String password, double balance) {
-		super(username, password, balance);
+	Owner(String username, String password, String email) {
+		super(username, password, 500000.0, email);
 		this.businesses = new ArrayList<String>();
 	}
 

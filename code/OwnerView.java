@@ -1,6 +1,10 @@
 
 public class OwnerView 
 {
+	OwnerView(Owner ownerInfo)
+	{
+		
+	}
 
 	public void displayManageBusinessScreen ()
 	{

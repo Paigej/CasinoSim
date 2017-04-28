@@ -10,17 +10,27 @@
 public abstract class User {
 	private String password;
 	private double balance;
-
 	public String username;
+	private String email;
 
-	User(String username, String password, double balance) {
+	User(String username, String password, double balance, String email) {
 		this.password = password;
 		this.username = username;
 		this.balance = balance;
+		this.setEmail(email);
 	}
+
 
 	public double getBalance() {
 		return balance;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public boolean validatePassword(String password_entered) {
