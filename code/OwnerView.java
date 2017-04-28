@@ -17,6 +17,7 @@ public class OwnerView
 	public ArrayList<Business> userBusinesses; //list of businesses owned by current user
 	
 	private static Scanner scan; //class that can take in input from user
+	public ArrayList<String> businessesAvailableToPurchase = new ArrayList<String>();
 
 	/*
 	 * Since this is a view class it receives info about the user it is displaying to
@@ -27,6 +28,7 @@ public class OwnerView
 		this.userID = ownerInfo.username;
 		this.userBalance = ownerInfo.getBalance();
 		this.userBusinesses = ownerInfo.getBusinesses();
+		businessesAvailableToPurchase.add("Casino");
 	}
 	
 	/*
@@ -73,7 +75,7 @@ public class OwnerView
 		}
 		else if (userSelection.indexOf("Buy") != -1 || userSelection.indexOf("buy") != -1)
 		{
-			System.out.println("Enter in business info");
+			createBusiness();
 		}
 		else
 		{
@@ -91,7 +93,7 @@ public class OwnerView
 	 * if user says yes we are taken to buyBusiness screen
 	 * if no we are taken back to manage business screen
 	 * 
-	 * post: BuyBusiness() is called or manage business screen is displayed
+	 * post: createBusiness() is called or manage business screen is displayed
 	 * 
 	 */
 	
@@ -107,7 +109,7 @@ public class OwnerView
 				String userDecision = scan.nextLine();
 				if (userDecision.indexOf("Y") != -1 || userDecision.indexOf("y") != -1)
 				{
-					System.out.println("User is buying a business");
+					createBusiness();
 					validResponse = true;
 				}
 				else if (userDecision.indexOf("N") != -1 || userDecision.indexOf("n") != -1)
@@ -137,6 +139,42 @@ public class OwnerView
 			String businessToBeEdited = scan.nextLine();
 			System.out.println(businessToBeEdited);
 		}
+	}
+	
+	/*
+	 * pre-req: User has decided to buy a business
+	 * 
+	 * displays list of businesses to purchase
+	 * asks user to enter the name of business
+	 * 
+	 * post: user is taken to respective business buying screen
+	 */
+	
+	public void createBusiness()
+	{
+		System.out.println("Businesses Available: ");
+		boolean validResponse = false;
+		while (validResponse == false)
+		{
+			for (int i = 0; i < businessesAvailableToPurchase.size(); i = i + 1)
+			{
+				System.out.println(businessesAvailableToPurchase.get(i));
+			}
+			System.out.println("What would you like to purchase?");
+			scan = new Scanner(System.in);
+			String businessToBeMade = scan.nextLine();
+			
+			if (businessesAvailableToPurchase.indexOf(businessToBeMade) != -1)
+			{
+				System.out.println(businessToBeMade + " selected");
+				validResponse = true;
+			}
+			else
+			{
+				System.out.println("Please type in one of the following businesses:");
+			}
+		}
+		
 	}
 	
 }
