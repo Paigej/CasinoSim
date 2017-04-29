@@ -11,8 +11,8 @@ public class GameDecorator extends Game {
 
 	protected static Game game;
 	
-	GameDecorator(String id, Casino owningCasino, String name) {
-		super(id, owningCasino, name);
+	GameDecorator(Casino owningCasino, String name) {
+		super(owningCasino, name);
 	}
 
 }

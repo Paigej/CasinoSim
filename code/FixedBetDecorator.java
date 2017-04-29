@@ -17,8 +17,8 @@ public class FixedBetDecorator extends GameDecorator {
 	Random rand = new Random();
 
 
-	FixedBetDecorator(String id, Casino owningCasino, String name, double fixedBetAmount) {
-		super(id, owningCasino, name);
+	FixedBetDecorator(Casino owningCasino, String name, double fixedBetAmount) {
+		super(owningCasino, name);
 		this.fixedBetAmount = fixedBetAmount;
 	}
 	

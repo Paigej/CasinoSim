@@ -9,7 +9,6 @@
 
 public abstract class Game {
 
-	private String id;
 	private Casino owningCasino;
 	// Figure out the probability table --> private probTable;
 
@@ -18,14 +17,9 @@ public abstract class Game {
 	public int seatsAvailable;
 	public int seatsOccupied;
 	
-	Game(String _id, Casino _owningCasino, String _name) {
-		this.id = _id;
+	Game(Casino _owningCasino, String _name) {
 		this.setOwningCasino(_owningCasino);
 		this.name = _name;
-	}
-
-	public String getID() {
-		return id;
 	}
 
 	public double playGame(Player playerID, double bet) {

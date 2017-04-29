@@ -16,8 +16,8 @@ public class SimpleGame extends Game {
 	private double payoffRate = 0.8;
 	Random rand = new Random();
 
-	SimpleGame(String id, Casino owningCasino, String name) {
-		super(id, owningCasino, name);
+	SimpleGame(Casino owningCasino, String name) {
+		super(owningCasino, name);
 	}
 
 	@Override

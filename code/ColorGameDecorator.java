@@ -19,8 +19,8 @@ public class ColorGameDecorator extends GameDecorator {
 	
 	Random rand = new Random();
 	
-	ColorGameDecorator(String id, Casino owningCasino, String name) {
-		super(id, owningCasino, name);
+	ColorGameDecorator(Casino owningCasino, String name) {
+		super(owningCasino, name);
 	}
 
 

@@ -408,7 +408,10 @@ public class OwnerView
 		userBalance = userBalance - 100000.0;
 		System.out.println("Congratulations! You are now the proud owner of " + casinoName +"!");
 		System.out.println("All casinos must have at least 1 game, so lets add one!");
-		usersCasino = addGameToCasino(usersCasino);
+		Game newGame = addGameToCasino(usersCasino);
+		ArrayList<Game> currentGamesInCasino = usersCasino.getGamesInCasino();
+		currentGamesInCasino.add(newGame);
+		usersCasino.updateCasino(currentGamesInCasino, usersCasino.getUsers(), usersCasino.income, usersCasino.loss);
 		userBusinesses.add(usersCasino);
 		updateOwner();
 		displayManageBusinessScreen();
@@ -433,43 +436,130 @@ public class OwnerView
 				+ "Cost $24,000 %50, 5.2%, 2.6% odds." );
 	}
 	
-	public Casino addGameToCasino(Casino usersCasino)
+	public Game addGameToCasino(Casino usersCasino)
 	{
-		ArrayList<Game> gamesInCasino = usersCasino.getGamesInCasino();
 		scan = new Scanner(System.in);
-		if (gamesInCasino.size() == 0)
+		printGameOptions();
+		boolean validResponse = false;
+		
+		while (validResponse == false)
 		{
-			printGameOptions();
-			boolean validResponse = false;
-			
-			while (validResponse == false)
+			System.out.println("Please type 'Simple', 'Strict', 'Fixed', or 'Color'");
+			String gameSelection = scan.nextLine();
+			if (gameSelection.toLowerCase().indexOf("simple") != -1)
 			{
-				System.out.println("Please type 'Simple', 'Strict', 'Fixed', or 'Color'");
-				String gameSelection = scan.nextLine();
-				if (gameSelection.toLowerCase().indexOf("simple") != -1)
-				{
-					createSimpleGame(1);
-					validResponse = true;
-				}
-				else if (gameSelection.toLowerCase().indexOf("strict") != -1)
-				{
-					createStrictGame(2);
-					validResponse = true;
-					
-				}
-				else if (gameSelection.toLowerCase().indexOf("fixed") != -1)
-				{
-					createFixedGame(3);
-					validResponse = true;
-				}
-				else if (gameSelection.toLowerCase().indexOf("color") != -1)
-				{
-					createColorGame(4);
-					validResponse = true;
-				}
+				return createSimpleGame(usersCasino);
+			}
+			else if (gameSelection.toLowerCase().indexOf("strict") != -1)
+			{
+				return createStrictGame(usersCasino);
+				
+			}
+			else if (gameSelection.toLowerCase().indexOf("fixed") != -1)
+			{
+				return createFixedGame(usersCasino);
+			}
+			else if (gameSelection.toLowerCase().indexOf("color") != -1)
+			{
+				return createColorGame(usersCasino);
+			}
+			
+		}
+		return null;
+		
+	}
+	
+	public Game createSimpleGame(Casino usersCasino)
+	{
+		scan = new Scanner(System.in);
+		System.out.print("To buy a Simple Game you must give it a unique name (i.e. MagicMoney1):");
+		String name  = scan.nextLine();
+		SimpleGame newGame = new SimpleGame(usersCasino, name);
+		return newGame;
+	}
+	
+	public Game createStrictGame(Casino usersCasino)
+	{
+		scan = new Scanner(System.in);
+		System.out.print("To buy a Strict Game you must give it a unique name (i.e. MagicMoney1):");
+		String name  = scan.nextLine();
+		System.out.println("You must also provdide a minimum bet amount:");
+		boolean validResponse = false;
+		double min = 0.0;
+		while (validResponse == false)
+		{
+			String minBet  = scan.nextLine();
+			try
+			{
+			  min = Double.parseDouble(minBet);
+			  if (min > 0.0)
+			  {
+				  validResponse = true;
+			  }
+			}
+			catch(NumberFormatException e)
+			{
+			  System.out.println("Please specify a number greater than 0");
 			}
 		}
-		
+		System.out.println("You must also provdide a maxium bet amount:");
+		boolean validResponse2 = false;
+		double max = 0.0;
+		while (validResponse2 == false)
+		{
+			String maxBet  = scan.nextLine();
+			try
+			{
+			  max = Double.parseDouble(maxBet);
+			  if (max > min)
+			  {
+				  validResponse2 = true;
+			  }
+			}
+			catch(NumberFormatException e)
+			{
+			  System.out.println("Please specify a number greater than " + min);
+			}
+		}
+		DynamicBetDecorator newGame = new DynamicBetDecorator(usersCasino, name, min, max);
+		return newGame;
+	}
+	
+	public Game createFixedGame(Casino usersCasino)
+	{
+		scan = new Scanner(System.in);
+		System.out.print("To buy a Fixed Bet Game you must give it a unique name (i.e. MagicMoney1):");
+		String name  = scan.nextLine();
+		System.out.println("You must also provdide a fixed bet amount:");
+		boolean validResponse = false;
+		double fixedBet = 0.0;
+		while (validResponse == false)
+		{
+			String fixedBetInput  = scan.nextLine();
+			try
+			{
+			  fixedBet = Double.parseDouble(fixedBetInput);
+			  if (fixedBet > 0.0)
+			  {
+				  validResponse = true;
+			  }
+			}
+			catch(NumberFormatException e)
+			{
+			  System.out.println("Please specify a number greater than 0");
+			}
+		}
+		FixedBetDecorator newGame = new FixedBetDecorator(usersCasino, name, fixedBet);
+		return newGame;
+	}
+	
+	public Game createColorGame(Casino usersCasino)
+	{
+		scan = new Scanner(System.in);
+		System.out.print("To buy a Color Game you must give it a unique name (i.e. MagicMoney1):");
+		String name  = scan.nextLine();
+		ColorGameDecorator newGame = new ColorGameDecorator(usersCasino, name);
+		return newGame;
 	}
 	
 }

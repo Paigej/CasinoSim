@@ -16,8 +16,8 @@ public class DynamicBetDecorator extends GameDecorator {
 	private double payoutMultiplier = 2.5;
 	Random rand = new Random();
 
-	DynamicBetDecorator(String id, Casino owningCasino, String name, double _minBet, double _maxBet) {
-		super(id, owningCasino, name);
+	DynamicBetDecorator(Casino owningCasino, String name, double _minBet, double _maxBet) {
+		super(owningCasino, name);
 		this.minBet = _minBet;
 		this.maxBet = _maxBet;
 	}
