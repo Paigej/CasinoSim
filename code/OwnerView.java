@@ -185,9 +185,33 @@ public class OwnerView
 		
 	}
 	
+	public int verifyOwnerFunds(double pendingAmount)
+	{
+		if ((userBalance - pendingAmount) <= 0.0)
+		{
+			return -1;
+		}
+		else
+		{
+			return 1;
+		}
+	}
+	
 	//NEED TO ADD FUNCTIONALITY TO CHECK USERS BALANCE
 	public void createCasino()
 	{
+		int userPaymentVerification = verifyOwnerFunds(10000.0);
+		if (userPaymentVerification == -1)
+		{
+			System.out.println("Unfortunatly you do not have the required funds ($10,000) to purchase a casino");
+			System.out.println("Your balance: " + userBalance);
+			System.out.println("You may wait to see if your current businesses will profit, or you"
+					+ " may sell a business in the edit menu. ");
+			displayManageBusinessScreen();
+			displayManageBusinessOptions();
+			return;
+			
+		}
 		System.out.println("It costs $100,000 to open a casino, you have " + userBalance
 				+ " would you like to continue?");
 		boolean validResponse = false;
