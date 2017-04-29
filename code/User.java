@@ -11,6 +11,10 @@ public abstract class User {
 	private String password;
 	private double balance;
 	public String username;
+	public void setBalance(double balance) {
+		this.balance = balance;
+	}
+
 	private String email;
 
 	User(String username, String password, double balance, String email) {
@@ -24,7 +28,12 @@ public abstract class User {
 	public double getBalance() {
 		return balance;
 	}
-
+	
+	public void increaseBalance(double profit)
+	{
+		balance = balance + profit;
+	}
+	
 	public String getEmail() {
 		return email;
 	}

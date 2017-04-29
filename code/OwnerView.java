@@ -327,13 +327,89 @@ public class OwnerView
 	public void displayGameScreen(Casino usersCasino)
 	{
 		ArrayList<Game> gamesInCasino = usersCasino.getGamesInCasino();
+		ArrayList<String> gameNames = new ArrayList<String>();
 		for (int i = 0; i < gamesInCasino.size(); i = i + 1)
 		{
 			System.out.println(PrettyPrint.prettyPrintGame(gamesInCasino.get(i)));
+			gameNames.add(gamesInCasino.get(i).name);
 		}
+		System.out.println("Would you like to edit a game, sell a game, or leave game menu?");
+		scan = new Scanner(System.in);
+		boolean validResponse = false;
+		while (validResponse == false)
+		{
+			String response = scan.nextLine();
+			if (response.toLowerCase().indexOf("edit") != -1)
+			{
+				System.out.println("Which game would you like to edit?");
+				boolean validGameSelected = false;
+				while (validGameSelected == false)
+				{
+					String selectedGame = scan.nextLine();
+					if (gameNames.contains(selectedGame))
+					{
+						int gamePositionInList = gameNames.indexOf(selectedGame);
+						modifyGame(gamesInCasino.get(gamePositionInList));
+						displayManageBusinessScreen();
+						displayManageBusinessOptions();
+						return;
+					}
+					else
+					{
+						System.out.println("Please select a game to edit by typing its name");
+					}
+				}
+			}
+			else if (response.toLowerCase().indexOf("sell") != -1)
+			{
+				System.out.println("Which game would you like to sell?");
+				boolean validGameSelected = false;
+				while (validGameSelected == false)
+				{
+					String selectedGame = scan.nextLine();
+					if (gameNames.contains(selectedGame))
+					{
+						int gamePositionInList = gameNames.indexOf(selectedGame);
+						sellGame(gamesInCasino.get(gamePositionInList));
+						displayManageBusinessScreen();
+						displayManageBusinessOptions();
+						return;
+					}
+					else
+					{
+						System.out.println("Please select a game to sell by typing its name");
+					}
+				}
+			}
+			else if (response.toLowerCase().indexOf("leave") != -1)
+			{
+				displayManageBusinessScreen();
+				displayManageBusinessOptions();
+				return;
+			}
+			else
+			{
+				System.out.println("Please type 'Edit', 'Sell', or 'Leave'");
+			}
+			
+		}
+		
 	}
 	
+	public void sellGame(Game game)
+	{
+		Casino owningCasino = game.getOwningCasino();
+		ArrayList<Game> updatedGames = game.getOwningCasino().getGamesInCasino();
+		updatedGames.remove(game);
+		owningCasino.updateCasino(updatedGames, owningCasino.getUsers(), owningCasino.income, owningCasino.loss);
+		userBalance = userBalance + 5000.0;
+		linkToOwner.updateOwner(userID, userBalance, userBusinesses);
+	}
 	
+	public void modifyGame(Game game)
+	{
+		
+	}
 	/*
 	 * pre-req: User has decided to buy a business
 	 * 

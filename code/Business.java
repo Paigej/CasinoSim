@@ -12,7 +12,7 @@ public abstract class Business {
 	private String passcode;
 
 	private boolean IsPrivate;
-	private String ownerID;
+	private Owner ownerID;
 	private double netGain;
 
 	public String name;
@@ -54,11 +54,11 @@ public abstract class Business {
 		return (givenPasscode == passcode);
 	}
 
-	public String getOwnerID() {
+	public Owner getOwnerID() {
 		return ownerID;
 	}
 
-	public void setOwnerID(String ownerID) {
+	public void Owner(Owner ownerID) {
 		this.ownerID = ownerID;
 	}
 
