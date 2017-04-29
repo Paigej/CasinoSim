@@ -185,7 +185,8 @@ public class PlayerView {
 			int positionInList = casinoGameNames.indexOf(userSelection);
 			if (positionInList != -1)
 			{
-				System.out.println(casinoGames.get(positionInList).playGame(linkToPlayer, 50.0));
+				determineWhichPlayGame(casinoGames.get(positionInList));
+				//System.out.println(casinoGames.get(positionInList).playGame(linkToPlayer, 50.0));
 				validResponse = true;
 			}
 			else
@@ -194,6 +195,61 @@ public class PlayerView {
 			}
 			
 		}
+	}
+
+	private void determineWhichPlayGame(Game game) 
+	{
+		if (game instanceof SimpleGame)
+		{
+			SimpleGame gameMadeSimple = (SimpleGame) game;
+			System.out.println(gameMadeSimple.playGame(linkToPlayer, 500.0));
+		}
+		else if (game instanceof ColorGameDecorator)
+		{
+			ColorGameDecorator gameMadeColor = (ColorGameDecorator) game;
+			System.out.println(gameMadeColor.playGame(linkToPlayer, 600.0, 1, 7));
+		}
+		else if (game instanceof FixedBetDecorator)
+		{
+			FixedBetDecorator gameMadeFixed = (FixedBetDecorator) game;
+			System.out.println(gameMadeFixed.playGame(linkToPlayer, 700.0));
+		}
+		else if (game instanceof DynamicBetDecorator)
+		{
+			DynamicBetDecorator gameMadeDynamic = (DynamicBetDecorator) game;
+			System.out.println(gameMadeDynamic.playGame(linkToPlayer, 800.0));
+		}
+		else
+		{
+			System.out.println("******COULD NOT DETERMINE GAME TYPE" +game + " " + game.name);
+		}
+		repeatPlay(game);
+		displayMainPlayerScreen();
+	}
+
+	private void repeatPlay(Game game) {
+		System.out.println("Play Agin?");
+		scan = new Scanner(System.in);
+		while (true)
+		{
+			String userSelection = scan.nextLine();
+			if (userSelection.toLowerCase().equals("yes"))
+			{
+				determineWhichPlayGame(game);
+				return;
+			}
+			else if (userSelection.toLowerCase().equals("no"))
+			{
+				displayMainPlayerScreen();
+				return;
+			}
+			else
+			{
+				System.out.println("Please type 'yes' to play again or 'no' to leave.");
+			}
+			
+		}
+		
 	}
 	
 }
