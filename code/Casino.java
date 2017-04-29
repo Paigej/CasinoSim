@@ -31,12 +31,15 @@ public class Casino extends Business {
 		return users;
 	}
 
-	public void setUsers(ArrayList<User> users) {
-		this.users = users;
-		userNames.clear();
-		for (User i: users)
+	public void setUsers(ArrayList<User> _users) {
+		if (this.users.equals(_users) == false)
 		{
-			userNames.add(i.username);
+			this.users = _users;
+			userNames.clear();
+			for (User i: this.users)
+			{
+				userNames.add(i.username);
+			}
 		}
 	}
 	
