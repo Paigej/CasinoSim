@@ -333,34 +333,13 @@ public class OwnerView
 			System.out.println(PrettyPrint.prettyPrintGame(gamesInCasino.get(i)));
 			gameNames.add(gamesInCasino.get(i).name);
 		}
-		System.out.println("Would you like to edit a game, sell a game, or leave game menu?");
+		System.out.println("Would you like to buy a game, edit a game, sell a game, or leave game menu?");
 		scan = new Scanner(System.in);
 		boolean validResponse = false;
 		while (validResponse == false)
 		{
 			String response = scan.nextLine();
-			if (response.toLowerCase().indexOf("edit") != -1)
-			{
-				System.out.println("Which game would you like to edit?");
-				boolean validGameSelected = false;
-				while (validGameSelected == false)
-				{
-					String selectedGame = scan.nextLine();
-					if (gameNames.contains(selectedGame))
-					{
-						int gamePositionInList = gameNames.indexOf(selectedGame);
-						modifyGame(gamesInCasino.get(gamePositionInList));
-						displayManageBusinessScreen();
-						displayManageBusinessOptions();
-						return;
-					}
-					else
-					{
-						System.out.println("Please select a game to edit by typing its name");
-					}
-				}
-			}
-			else if (response.toLowerCase().indexOf("sell") != -1)
+			if (response.toLowerCase().indexOf("sell") != -1)
 			{
 				System.out.println("Which game would you like to sell?");
 				boolean validGameSelected = false;
@@ -380,6 +359,16 @@ public class OwnerView
 						System.out.println("Please select a game to sell by typing its name");
 					}
 				}
+			}
+			else if (response.toLowerCase().indexOf("buy") != -1)
+			{
+				Game newGame = addGameToCasino(usersCasino);
+				gamesInCasino.add(newGame);
+				usersCasino.updateCasino(gamesInCasino, usersCasino.getUsers(), usersCasino.income, usersCasino.loss);
+				updateOwner();
+				displayManageBusinessScreen();
+				displayManageBusinessOptions();
+				return;
 			}
 			else if (response.toLowerCase().indexOf("leave") != -1)
 			{
@@ -404,12 +393,9 @@ public class OwnerView
 		owningCasino.updateCasino(updatedGames, owningCasino.getUsers(), owningCasino.income, owningCasino.loss);
 		userBalance = userBalance + 5000.0;
 		linkToOwner.updateOwner(userID, userBalance, userBusinesses);
+		game = null;
 	}
 	
-	public void modifyGame(Game game)
-	{
-		
-	}
 	/*
 	 * pre-req: User has decided to buy a business
 	 * 
