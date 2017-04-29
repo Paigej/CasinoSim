@@ -9,6 +9,8 @@ public class PlayerView {
 	private Player linkToPlayer;
 	
 	public ArrayList<Owner> defaultOwners = new ArrayList<Owner>();
+	public ArrayList<String> defaultBusinessNames = new ArrayList<String>();
+	
 	/*
 	 * Since this is a view class it receives info about the user it is displaying to
 	 * so the constructor below takes in an Owner object
@@ -99,11 +101,12 @@ public class PlayerView {
 		System.out.println("Current Worth: " +  userBalance);
 		System.out.println("---------------------------------------------------------------------------------------");
 		System.out.println("Casino Name | Owner | NumberOfGames | OwnerWorth");
-
+		defaultBusinessNames.clear();
 		for(int i = 0; i < defaultOwners.size(); i = i + 1) 
 		{
 			for (Business currentBusiness: defaultOwners.get(i).businesses)
 			{
+				defaultBusinessNames.add(currentBusiness.name);
 				if (currentBusiness instanceof Casino)
 				{
 				Casino currentCasino = (Casino) currentBusiness;
@@ -115,10 +118,32 @@ public class PlayerView {
 				}
 			}
 		}
+		mainPlayerScreenPrompt();
 
 	}
 	
-
+	//NOTE THIS SHOULD ONLY BE CALLED AFTER DISPLAYMAINPLAYERSCREEN()
+	public void mainPlayerScreenPrompt ()
+	{
+		boolean validResponse = false;
+		System.out.println("Please chose a casino to enter:");
+		scan = new Scanner(System.in);
+		while (validResponse == false)
+		{
+			String userSelection = scan.nextLine();
+			int positionInList = defaultBusinessNames.indexOf(userSelection);
+			if (positionInList != -1)
+			{
+				System.out.println("Go to Casino");
+				validResponse = true;
+			}
+			else
+			{
+				System.out.println("Please type the name of one of the businesses above.");
+			}
+			
+		}
+	}
 	
 	
 }
