@@ -160,10 +160,39 @@ public class OwnerView
 		}
 	}
 	
-	public void changeBusinessAttribute(String attribute, Business businessToBeModified)
+	public void sellBusiness(Business businessToBeSold)
 	{
-		
+		System.out.println("Selling " + businessToBeSold.name + " would give you $70,000");
+		System.out.println("Would you like to proceed?");
+		boolean validResponse = false;
+		while (validResponse == false)
+		{
+			scan = new Scanner(System.in);
+			String userDecision = scan.nextLine();
+			if (userDecision.indexOf("Y") != -1 || userDecision.indexOf("y") != -1)
+			{
+				userBalance = userBalance + 70000.0;
+				userBusinesses.remove(businessToBeSold);
+				//NEED UPDATE USER METHOD
+				businessToBeSold = null;
+				displayManageBusinessScreen();
+				displayManageBusinessOptions();
+				return;
+			}
+			else if (userDecision.indexOf("N") != -1 || userDecision.indexOf("n") != -1)
+			{
+				displayManageBusinessScreen();
+				displayManageBusinessOptions();
+				return;
+				
+			}
+			else
+			{
+				System.out.println("Please type 'Yes' or 'No'");
+			}
+		}
 	}
+	
 	//Should make a prettyPrint Function
 	public void modifyBusiness(Business businessToBeModified)
 	{
@@ -179,7 +208,7 @@ public class OwnerView
 			String userDecision = scan.nextLine();
 			if (userDecision.indexOf("sell") != -1 || userDecision.indexOf("Sell") != -1)
 			{
-				System.out.println("Gonna sell this homie");
+				sellBusiness(businessToBeModified);
 				return;
 			}
 			else if (userDecision.indexOf("Name") != -1 || userDecision.indexOf("name") != -1)
@@ -216,7 +245,7 @@ public class OwnerView
 					}
 					else
 					{
-						System.out.println("Please type 'Open' or 'Close'");
+						System.out.println("Please type 'Open' or 'Closed'");
 					}
 				}
 			}
