@@ -102,11 +102,13 @@ public class PlayerView {
 		System.out.println("---------------------------------------------------------------------------------------");
 		System.out.println("Casino Name | Owner | NumberOfGames | OwnerWorth");
 		defaultBusinessNames.clear();
+		ArrayList<Business> defaultBusinesses = new ArrayList<Business>();
 		for(int i = 0; i < defaultOwners.size(); i = i + 1) 
 		{
 			for (Business currentBusiness: defaultOwners.get(i).businesses)
 			{
 				defaultBusinessNames.add(currentBusiness.name);
+				defaultBusinesses.add(currentBusiness);
 				if (currentBusiness instanceof Casino)
 				{
 				Casino currentCasino = (Casino) currentBusiness;
@@ -118,15 +120,15 @@ public class PlayerView {
 				}
 			}
 		}
-		mainPlayerScreenPrompt();
+		mainPlayerScreenPrompt(defaultBusinesses);
 
 	}
 	
 	//NOTE THIS SHOULD ONLY BE CALLED AFTER DISPLAYMAINPLAYERSCREEN()
-	public void mainPlayerScreenPrompt ()
+	public void mainPlayerScreenPrompt (ArrayList<Business> businesses)
 	{
 		boolean validResponse = false;
-		System.out.println("Please chose a casino to enter:");
+		System.out.println("Please choose a casino to enter:");
 		scan = new Scanner(System.in);
 		while (validResponse == false)
 		{
@@ -134,7 +136,7 @@ public class PlayerView {
 			int positionInList = defaultBusinessNames.indexOf(userSelection);
 			if (positionInList != -1)
 			{
-				System.out.println("Go to Casino");
+				enterBusiness(businesses.get(positionInList));
 				validResponse = true;
 			}
 			else
@@ -144,6 +146,54 @@ public class PlayerView {
 			
 		}
 	}
-	
+
+	private void enterBusiness(Business business) 
+	{
+		
+		if (business instanceof Casino)
+		{
+			Casino currentCasino = (Casino) business;
+			enterCasino(currentCasino);
+		}
+		else
+		{
+			System.out.println("REQUIRES BUSINESS EXTENDIBILITY");
+		}
+	}
+	private void enterCasino(Casino casino)
+	{
+		System.out.println(PrettyPrint.prettyPrintCasinoForPlayer(casino));
+		System.out.println("--------------------");
+		ArrayList<Game> casinoGames = casino.getGamesInCasino();
+		ArrayList<String> casinoGameNames = new ArrayList<String>();
+		for (Game currentGame : casinoGames)
+		{
+			casinoGameNames.add(currentGame.name);
+			System.out.println(PrettyPrint.prettyPrintGame(currentGame));
+		}
+		gameScreenPrompt(casinoGames, casinoGameNames);
+	}
+
+	private void gameScreenPrompt(ArrayList<Game> casinoGames, ArrayList<String> casinoGameNames) 
+	{
+		boolean validResponse = false;
+		System.out.println("Please choose a game to enter or type 'Leave' to leave casino:");
+		scan = new Scanner(System.in);
+		while (validResponse == false)
+		{
+			String userSelection = scan.nextLine();
+			int positionInList = casinoGameNames.indexOf(userSelection);
+			if (positionInList != -1)
+			{
+				System.out.println(casinoGames.get(positionInList).playGame(linkToPlayer, 50.0));
+				validResponse = true;
+			}
+			else
+			{
+				System.out.println("Please type the name of one of the game's names above or 'Leave'.");
+			}
+			
+		}
+	}
 	
 }
