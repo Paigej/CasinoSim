@@ -23,6 +23,16 @@ public class FixedBetDecorator extends GameDecorator {
 	}
 	
 	
+	public double getFixedBetAmount() {
+		return fixedBetAmount;
+	}
+
+
+	public void setFixedBetAmount(double fixedBetAmount) {
+		this.fixedBetAmount = fixedBetAmount;
+	}
+
+
 	public boolean checkBet(double bet) {
 		return (fixedBetAmount == bet);
 	}

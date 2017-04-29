@@ -22,6 +22,22 @@ public class DynamicBetDecorator extends GameDecorator {
 		this.maxBet = _maxBet;
 	}
 
+	public double getMinBet() {
+		return minBet;
+	}
+
+	public void setMinBet(double minBet) {
+		this.minBet = minBet;
+	}
+
+	public double getMaxBet() {
+		return maxBet;
+	}
+
+	public void setMaxBet(double maxBet) {
+		this.maxBet = maxBet;
+	}
+
 	public boolean checkBet(double bet) {
 		return (minBet < bet && bet < maxBet);
 	}

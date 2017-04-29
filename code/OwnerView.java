@@ -312,7 +312,8 @@ public class OwnerView
 			}
 			else if (userDecision.toLowerCase().indexOf("games") != -1 && isCasino == true)
 			{
-				
+				Casino businessAsCasino = (Casino) businessToBeModified;
+				displayGameScreen(businessAsCasino);
 				return;
 			}
 			else
@@ -322,6 +323,16 @@ public class OwnerView
 			
 		}
 	}
+	
+	public void displayGameScreen(Casino usersCasino)
+	{
+		ArrayList<Game> gamesInCasino = usersCasino.getGamesInCasino();
+		for (int i = 0; i < gamesInCasino.size(); i = i + 1)
+		{
+			System.out.println(PrettyPrint.prettyPrintGame(gamesInCasino.get(i)));
+		}
+	}
+	
 	
 	/*
 	 * pre-req: User has decided to buy a business

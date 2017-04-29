@@ -24,6 +24,26 @@ public class ColorGameDecorator extends GameDecorator {
 	}
 
 
+	public int getNumberOfSpaces() {
+		return numberOfSpaces;
+	}
+
+
+	public void setNumberOfSpaces(int numberOfSpaces) {
+		this.numberOfSpaces = numberOfSpaces;
+	}
+
+
+	public double getNumberOfColors() {
+		return numberOfColors;
+	}
+
+
+	public void setNumberOfColors(double numberOfColors) {
+		this.numberOfColors = numberOfColors;
+	}
+
+
 	public double playGame(Player playerID, double bet, int color, int boardNumber) 
 	{
 		int randomBoardNumber = rand.nextInt(39) + 1;
