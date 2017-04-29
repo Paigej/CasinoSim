@@ -72,15 +72,18 @@ public class OwnerView
 		if (userSelection.indexOf("edit") != -1 || userSelection.indexOf("Edit") != -1)
 		{
 			choseABusinessToEdit();
+			return;
 		}
 		else if (userSelection.indexOf("Buy") != -1 || userSelection.indexOf("buy") != -1)
 		{
 			createBusiness();
+			return;
 		}
 		else
 		{
 			System.out.println("Please type 'Edit' or 'Buy'");
 			displayManageBusinessOptions();
+			return;
 		}
 	}
 	
@@ -117,6 +120,7 @@ public class OwnerView
 					validResponse = true;
 					displayManageBusinessScreen();
 					displayManageBusinessOptions();
+					return;
 					
 				}
 				else
@@ -154,6 +158,7 @@ public class OwnerView
 	{
 		System.out.println("Businesses Available: ");
 		boolean validResponse = false;
+		String businessToBeMade = "";
 		while (validResponse == false)
 		{
 			for (int i = 0; i < businessesAvailableToPurchase.size(); i = i + 1)
@@ -162,11 +167,10 @@ public class OwnerView
 			}
 			System.out.println("What would you like to purchase?");
 			scan = new Scanner(System.in);
-			String businessToBeMade = scan.nextLine();
+			businessToBeMade = scan.nextLine();
 			
 			if (businessesAvailableToPurchase.indexOf(businessToBeMade) != -1)
 			{
-				System.out.println(businessToBeMade + " selected");
 				validResponse = true;
 			}
 			else
@@ -174,7 +178,49 @@ public class OwnerView
 				System.out.println("Please type in one of the following businesses:");
 			}
 		}
+		if (businessToBeMade.equals("Casino"))
+		{
+			createCasino();
+		}
 		
 	}
 	
+	//NEED TO ADD FUNCTIONALITY TO CHECK USERS BALANCE
+	public void createCasino()
+	{
+		System.out.println("It costs $100,000 to open a casino, you have " + userBalance
+				+ " would you like to continue?");
+		boolean validResponse = false;
+		while (validResponse == false)
+		{
+			scan = new Scanner(System.in);
+			String confirmation = scan.nextLine();
+			if (confirmation.indexOf("Y") != -1 || confirmation.indexOf("y") != -1)
+			{
+				validResponse = true;
+			}
+			else if (confirmation.indexOf("N") != -1 || confirmation.indexOf("n") != -1)
+			{
+				validResponse = true;
+				displayManageBusinessScreen();
+				displayManageBusinessOptions();
+				return;
+				
+			}
+			else
+			{
+				System.out.println("Please type 'Yes' or 'No'");
+			}
+		}
+		System.out.println("Please enter a unique name for this casino:");
+		scan = new Scanner(System.in);
+		String casinoName = scan.nextLine();
+		Casino usersCasino = new Casino(casinoName, userID);
+		userBalance = userBalance - 100000.0;
+		userBusinesses.add(usersCasino);
+		System.out.println("Congratulations! You are now the proud owner of " + casinoName +"!");
+		displayManageBusinessScreen();
+		displayManageBusinessOptions();
+		return;
+	}
 }
