@@ -1,5 +1,5 @@
 /******************************************************************************
- *  Author(s):    Derek Gorthy
+ *  Author(s):    Derek Gorthy, Michael Condon
  *
  *  Compilation:  javac Casino.java
  *  
@@ -10,8 +10,9 @@
 import java.util.*;
 
 public class Casino extends Business {
-	private ArrayList<String> gameIDList;
-	private ArrayList<String> users;
+	private ArrayList<Game> gamesInCasino;
+	private ArrayList<User> users;
+	private ArrayList<String> userNames;
 
 	public double income;
 	public double loss;
@@ -20,33 +21,48 @@ public class Casino extends Business {
 
 	Casino(String name, String ownerID) {
 		super(name, ownerID);
-		this.gameIDList = new ArrayList<String>();
-		this.gameIDList = new ArrayList<String>();
+		this.setGamesInCasino(new ArrayList<Game>());
+		this.users = new ArrayList<User>();
 		this.income = 0.0;
 		this.loss = 0.0;
 	}
 
-	public ArrayList<String> getUserList() {
+	public ArrayList<User> getUsers() {
 		return users;
 	}
 
-	// change to private
-	public void removeUser(String user) {
-		ArrayList<String> temp = new ArrayList<String>();
-		temp.add(user);
-		users.removeAll(temp);
+	public void setUsers(ArrayList<User> users) {
+		this.users = users;
+		userNames.clear();
+		for (User i: users)
+		{
+			userNames.add(i.username);
+		}
+	}
+	
+	public void removeUser(String user) 
+	{
+		int positionOfUserInList = userNames.indexOf(user);
+		users.remove(positionOfUserInList);
+		setUsers(users);
+	}
+	
+	public void updateCasino(ArrayList<Game> _gamesInCasino, ArrayList<User> _users, 
+			double _income, double _loss)
+	{
+		this.setGamesInCasino(_gamesInCasino);
+		this.setUsers(_users);
+		this.income = _income;
+		this.loss = _loss;
 	}
 
-	// Need to write game class for this function
-	//public Game addGame(String gameType, double maxBet, double minBet) {
-	//}
-
-	// change to private
-	public void removeGame(String gameID) {
-		ArrayList<String> temp = new ArrayList<String>();
-		temp.add(gameID);
-		gameIDList.removeAll(temp);
-		// Needs update owner balance code
-		// Need controls for kicking out users
+	public ArrayList<Game> getGamesInCasino() {
+		return gamesInCasino;
 	}
+
+	public void setGamesInCasino(ArrayList<Game> gamesInCasino) {
+		this.gamesInCasino = gamesInCasino;
+	}
+
+
 }
