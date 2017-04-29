@@ -10,6 +10,7 @@
 public abstract class Business {
 	private int id;
 	private String passcode;
+
 	private boolean IsPrivate;
 	private String ownerID;
 	private double netGain;
@@ -25,6 +26,10 @@ public abstract class Business {
 		this.id = 2;
 	}
 
+	public void setIsPrivate(boolean isPrivate) {
+		IsPrivate = isPrivate;
+	}
+	
 	public boolean getIsPrivate() {
 		return IsPrivate;
 	}

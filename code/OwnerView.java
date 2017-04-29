@@ -148,13 +148,123 @@ public class OwnerView
 				String businessToBeEdited = scan.nextLine();
 				if (businessesNames.contains(businessToBeEdited))
 				{
-					System.out.println("Call modify casino");
+					int positionOfBusinessInArray = businessesNames.indexOf(businessToBeEdited);
+					modifyBusiness(userBusinesses.get(positionOfBusinessInArray));
 					return;
 				}
 				else
 				{
 					System.out.println("Please enter a valid business name.");
 				}
+			}
+		}
+	}
+	
+	public void changeBusinessAttribute(String attribute, Business businessToBeModified)
+	{
+		
+	}
+	//Should make a prettyPrint Function
+	public void modifyBusiness(Business businessToBeModified)
+	{
+		scan = new Scanner(System.in);
+		while(true)
+		{
+			System.out.println(businessToBeModified.name + "'s information:");
+			System.out.println("Name: " +businessToBeModified.name +" | " + 
+					"Open?: " + businessToBeModified.open + " | " + "Private?: " +
+					businessToBeModified.getIsPrivate() + " | " + "Password: " + businessToBeModified.getPasscode());
+			System.out.println("Select an aspect to modify, or if"
+					+ " you would like to sell the Business type 'Sell'.");
+			String userDecision = scan.nextLine();
+			if (userDecision.indexOf("sell") != -1 || userDecision.indexOf("Sell") != -1)
+			{
+				System.out.println("Gonna sell this homie");
+				return;
+			}
+			else if (userDecision.indexOf("Name") != -1 || userDecision.indexOf("name") != -1)
+			{
+				System.out.println("What would you like the new name to be?");
+				scan = new Scanner(System.in);
+				String newName = scan.nextLine();
+				businessToBeModified.name = newName;
+				displayManageBusinessScreen();
+				displayManageBusinessOptions();
+				return;
+			}
+			else if (userDecision.indexOf("Open") != -1 || userDecision.indexOf("open") != -1)
+			{
+				System.out.println("Set business to Open or Closed?");
+				scan = new Scanner(System.in);
+				boolean validResponse = false;
+				while (validResponse == false)
+				{
+					String newOpeness = scan.nextLine();
+					if (newOpeness.indexOf("Open") != -1 || newOpeness.indexOf("open") != -1)
+					{
+						businessToBeModified.open = true;
+						displayManageBusinessScreen();
+						displayManageBusinessOptions();
+						return;
+					}
+					else if (newOpeness.indexOf("Closed") != -1 || newOpeness.indexOf("closed") != -1)
+					{
+						businessToBeModified.open = false;
+						displayManageBusinessScreen();
+						displayManageBusinessOptions();
+						return;
+					}
+					else
+					{
+						System.out.println("Please type 'Open' or 'Close'");
+					}
+				}
+			}
+			else if (userDecision.indexOf("Private") != -1 || userDecision.indexOf("private") != -1)
+			{
+				System.out.println("Set business to Public or Private?");
+				scan = new Scanner(System.in);
+				boolean validResponse = false;
+				while (validResponse == false)
+				{
+					String newPrivacy = scan.nextLine();
+					if (newPrivacy.indexOf("Private") != -1 || newPrivacy.indexOf("private") != -1)
+					{
+						businessToBeModified.setIsPrivate(true);
+						System.out.println("Please provide a password for this business");
+						String passcode = scan.nextLine();
+						businessToBeModified.setPasscode(passcode);
+						displayManageBusinessScreen();
+						displayManageBusinessOptions();
+						return;
+					}
+					else if (newPrivacy.indexOf("Public") != -1 || newPrivacy.indexOf("public") != -1)
+					{
+						businessToBeModified.setIsPrivate(false);
+						businessToBeModified.setPasscode("");
+						displayManageBusinessScreen();
+						displayManageBusinessOptions();
+						return;
+					}
+					else
+					{
+						System.out.println("Please type 'Private' or 'Public'");
+					}
+				}
+			}
+			else if (userDecision.indexOf("Password") != -1 || userDecision.indexOf("password") != -1)
+			{
+				businessToBeModified.setIsPrivate(true);
+				System.out.println("Please provide a new password for this business");
+				String passcode = scan.nextLine();
+				businessToBeModified.setPasscode(passcode);
+				displayManageBusinessScreen();
+				displayManageBusinessOptions();
+				return;
+			}
+			else
+			{
+				System.out.println("Please type 'Sell, 'Name', 'Open', 'Private', or 'Password'");
 			}
 		}
 	}
