@@ -224,6 +224,7 @@ public class OwnerView
 				scan = new Scanner(System.in);
 				String newName = scan.nextLine();
 				businessToBeModified.name = newName;
+				updateOwner();
 				displayManageBusinessScreen();
 				displayManageBusinessOptions();
 				return;
@@ -239,6 +240,7 @@ public class OwnerView
 					if (newOpeness.indexOf("Open") != -1 || newOpeness.indexOf("open") != -1)
 					{
 						businessToBeModified.open = true;
+						updateOwner();
 						displayManageBusinessScreen();
 						displayManageBusinessOptions();
 						return;
@@ -246,6 +248,7 @@ public class OwnerView
 					else if (newOpeness.indexOf("Closed") != -1 || newOpeness.indexOf("closed") != -1)
 					{
 						businessToBeModified.open = false;
+						updateOwner();
 						displayManageBusinessScreen();
 						displayManageBusinessOptions();
 						return;
@@ -270,6 +273,7 @@ public class OwnerView
 						System.out.println("Please provide a password for this business");
 						String passcode = scan.nextLine();
 						businessToBeModified.setPasscode(passcode);
+						updateOwner();
 						displayManageBusinessScreen();
 						displayManageBusinessOptions();
 						return;
@@ -278,6 +282,7 @@ public class OwnerView
 					{
 						businessToBeModified.setIsPrivate(false);
 						businessToBeModified.setPasscode("");
+						updateOwner();
 						displayManageBusinessScreen();
 						displayManageBusinessOptions();
 						return;
@@ -294,6 +299,7 @@ public class OwnerView
 				System.out.println("Please provide a new password for this business");
 				String passcode = scan.nextLine();
 				businessToBeModified.setPasscode(passcode);
+				updateOwner();
 				displayManageBusinessScreen();
 				displayManageBusinessOptions();
 				return;
@@ -401,6 +407,7 @@ public class OwnerView
 		Casino usersCasino = new Casino(casinoName, userID);
 		userBalance = userBalance - 100000.0;
 		userBusinesses.add(usersCasino);
+		updateOwner();
 		System.out.println("Congratulations! You are now the proud owner of " + casinoName +"!");
 		displayManageBusinessScreen();
 		displayManageBusinessOptions();
