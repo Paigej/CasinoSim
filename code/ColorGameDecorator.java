@@ -1,3 +1,5 @@
+import java.util.Random;
+
 /******************************************************************************
  *  Author(s):    Derek Gorthy, Michael Condon
  *
@@ -7,32 +9,41 @@
  *
  ******************************************************************************/
 
-import java.util.*;
+
 
 public class ColorGameDecorator extends GameDecorator {
-
-	private ArrayList<String> choiceList;
 	
-	ColorGameDecorator(Game g, ArrayList<String> choice) {
-		super(g);
-		this.choiceList = choice;
+	private int numberOfSpaces = 39;
+	private double numberOfColors = 2;
+	private double payoffRate = 0.8;
+	
+	Random rand = new Random();
+	
+	ColorGameDecorator(String id, Casino owningCasino, String name) {
+		super(id, owningCasino, name);
 	}
 
-	/*
-	 * Was this a copy-paste mistake? and is the above method what you were trying to do?
-	 * 
-	DynamicBetDecorator(Game g, ArrayList<String> choice) {
-		super(g);
-		this.choiceList = choice;
-	}
-*/
-	public boolean checkChoice(double bet) {
-		return (choiceList.contains(bet));
-	}
 
-	// Figure out how playGame will work
-	//@Override
-	//public void playGame(String playerID, double bet) {
-	//	System.out.print("It looks like playGame was not implemented correctly, in SimpleGame.")
-	//}
+	public double playGame(Player playerID, double bet, int color, int boardNumber) 
+	{
+		int randomBoardNumber = rand.nextInt(39) + 1;
+		int randomColor =  rand.nextInt(2) + 1;
+		if (color == randomColor && boardNumber == randomBoardNumber)
+		{
+			return (numberOfSpaces * payoffRate * bet); 
+			
+		}
+		else if (boardNumber == randomBoardNumber)
+		{
+			return ((numberOfSpaces / numberOfColors) * payoffRate * bet); 
+		}
+		else if (color == randomColor)
+		{
+			return (numberOfColors * payoffRate * bet); 
+		}
+		else
+		{
+			return (0.0 - bet);
+		}
+	}
 }

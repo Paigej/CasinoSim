@@ -406,11 +406,70 @@ public class OwnerView
 		String casinoName = scan.nextLine();
 		Casino usersCasino = new Casino(casinoName, userID);
 		userBalance = userBalance - 100000.0;
+		System.out.println("Congratulations! You are now the proud owner of " + casinoName +"!");
+		System.out.println("All casinos must have at least 1 game, so lets add one!");
+		usersCasino = addGameToCasino(usersCasino);
 		userBusinesses.add(usersCasino);
 		updateOwner();
-		System.out.println("Congratulations! You are now the proud owner of " + casinoName +"!");
 		displayManageBusinessScreen();
 		displayManageBusinessOptions();
 		return;
 	}
+	
+	public void printGameOptions()
+	{
+		System.out.println("There are 4 options for games:");
+		System.out.println("Simple Game: A player bets any amount of money and "
+				+ "we draw a card from a deck. "
+				+ "If it is a face card they win 2.5x their bet. Cost: $10,000, 37% odds of winning.");
+		System.out.println("Strict Bet Game: Same as Simple Game, but the bet must "
+				+ "be between specified amounts. Player wins 2.1x their bet. Cost $15,000, 37% odds.");
+		System.out.println("Fixed Bet Game: These are machine games. "
+				+ "Anything from slots to machine poker. "
+				+ "Bets are fixed, player wins 22x their bet. Cost $19,000 %3.7 odds." );
+		System.out.println("Color Game: These are table games like Roulette. Player "
+				+ "specifies a color, space, and bet. Player wins 1.6x their bet for correct color"
+				+ "16x their money for correct number. And 37x their money for both."
+				+ "Cost $24,000 %50, 5.2%, 2.6% odds." );
+	}
+	
+	public Casino addGameToCasino(Casino usersCasino)
+	{
+		ArrayList<Game> gamesInCasino = usersCasino.getGamesInCasino();
+		scan = new Scanner(System.in);
+		if (gamesInCasino.size() == 0)
+		{
+			printGameOptions();
+			boolean validResponse = false;
+			
+			while (validResponse == false)
+			{
+				System.out.println("Please type 'Simple', 'Strict', 'Fixed', or 'Color'");
+				String gameSelection = scan.nextLine();
+				if (gameSelection.toLowerCase().indexOf("simple") != -1)
+				{
+					createSimpleGame(1);
+					validResponse = true;
+				}
+				else if (gameSelection.toLowerCase().indexOf("strict") != -1)
+				{
+					createStrictGame(2);
+					validResponse = true;
+					
+				}
+				else if (gameSelection.toLowerCase().indexOf("fixed") != -1)
+				{
+					createFixedGame(3);
+					validResponse = true;
+				}
+				else if (gameSelection.toLowerCase().indexOf("color") != -1)
+				{
+					createColorGame(4);
+					validResponse = true;
+				}
+			}
+		}
+		
+	}
+	
 }

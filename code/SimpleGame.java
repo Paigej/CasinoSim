@@ -7,14 +7,30 @@
  *
  ******************************************************************************/
 
-public class SimpleGame extends Game {
+import java.util.Random;
 
-	SimpleGame(String id, String casinoID, String name) {
-		super(id, casinoID, name);
+
+public class SimpleGame extends Game {
+	
+	private double oddsOfWinPercentage = 37;
+	private double payoffRate = 0.8;
+	Random rand = new Random();
+
+	SimpleGame(String id, Casino owningCasino, String name) {
+		super(id, owningCasino, name);
 	}
 
 	@Override
-	public void playGame(String playerID, double bet) {
-		System.out.print("It looks like playGame was not implemented correctly, in SimpleGame.");
+	public double playGame(Player playerID, double bet) {
+		int randomNumber = rand.nextInt(100) + 1;
+		if (randomNumber < oddsOfWinPercentage)
+		{
+			//Win
+			return ((oddsOfWinPercentage * payoffRate) * bet);
+		}
+		else
+		{
+			return (0.0 - bet);
+		}
 	}
 }

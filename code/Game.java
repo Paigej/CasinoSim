@@ -10,35 +10,35 @@
 public abstract class Game {
 
 	private String id;
-	private String casinoID;
+	private Casino owningCasino;
 	// Figure out the probability table --> private probTable;
 
 	public String name;
 	public double costToBuild;
 	public int seatsAvailable;
 	public int seatsOccupied;
-
-	Game(){};
 	
-	Game(String id, String casinoID, String name) {
-		this.id = id;
-		this.setCasinoID(casinoID);
-		this.name = name;
+	Game(String _id, Casino _owningCasino, String _name) {
+		this.id = _id;
+		this.setOwningCasino(_owningCasino);
+		this.name = _name;
 	}
 
 	public String getID() {
 		return id;
 	}
 
-	public void playGame(String playerID, double bet) {
-		System.out.print("It looks like playGame was not implemented correctly, in Game.");
+	public double playGame(Player playerID, double bet) {
+		System.out.println("*******ERROR: DEFAULT GAME PLAYGAME CALLED");
+		return 0;
 	}
 
-	public String getCasinoID() {
-		return casinoID;
+
+	public Casino getOwningCasino() {
+		return owningCasino;
 	}
 
-	public void setCasinoID(String casinoID) {
-		this.casinoID = casinoID;
+	public void setOwningCasino(Casino owningCasino) {
+		this.owningCasino = owningCasino;
 	}
 }

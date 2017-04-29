@@ -11,16 +11,8 @@ public class GameDecorator extends Game {
 
 	protected static Game game;
 	
-	GameDecorator(){
-		this(game);
+	GameDecorator(String id, Casino owningCasino, String name) {
+		super(id, owningCasino, name);
 	}
 
-	GameDecorator(Game g) {
-		GameDecorator.game = g;
-	}
-
-	@Override
-		public void playGame(String playerID, double bet) {
-		System.out.print("It looks like playGame was not implemented correctly, in GameDecorator.");
-	}
 }

@@ -1,3 +1,5 @@
+import java.util.Random;
+
 /******************************************************************************
  *  Author(s):    Derek Gorthy, Michael Condon
  *
@@ -8,23 +10,33 @@
  ******************************************************************************/
 
 public class DynamicBetDecorator extends GameDecorator {
+	private double minBet;
+	private double maxBet;
+	private double oddsOfWin = 0.37;
+	private double payoutMultiplier = 2.5;
+	Random rand = new Random();
 
-	public double minBet;
-	public double maxBet;
-
-	DynamicBetDecorator(Game g, double min, double max) {
-		super(g);
-		this.minBet = min;
-		this.maxBet = max;
+	DynamicBetDecorator(String id, Casino owningCasino, String name, double _minBet, double _maxBet) {
+		super(id, owningCasino, name);
+		this.minBet = _minBet;
+		this.maxBet = _maxBet;
 	}
 
 	public boolean checkBet(double bet) {
 		return (minBet < bet && bet < maxBet);
 	}
-
-	// Figure out how playGame will work
-	//@Override
-	//public void playGame(String playerID, double bet) {
-	//	System.out.print("It looks like playGame was not implemented correctly, in SimpleGame.")
-	//}
+	
+	@Override
+	public double playGame(Player playerID, double bet) {
+		int randomNumber = rand.nextInt(100) + 1;
+		if (randomNumber < (100 * oddsOfWin))
+		{
+			//Win
+			return (payoutMultiplier * bet);
+		}
+		else
+		{
+			return (0.0 - bet);
+		}
+	}
 }
