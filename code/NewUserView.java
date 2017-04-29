@@ -199,8 +199,7 @@ public class NewUserView {
 			{
 				Player newUserAsPlayer = (Player) newUser;
 				PlayerView PlayersScreen = new PlayerView(newUserAsPlayer);
-				ownersScreen.displayManageBusinessScreen();
-				ownersScreen.displayManageBusinessOptions();
+				PlayersScreen.displayMainPlayerScreen();
 			}
 		}	
 	}
