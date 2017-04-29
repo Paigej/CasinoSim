@@ -1,36 +1,91 @@
-/******************************************************************************
- *  Author(s):    Michael Condon
- *
- *  Compilation:  javac OwnerView.java
- *  
- *  Displays UI for Owner user (Command-line UI version)
- *
- ******************************************************************************/
-
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class OwnerView 
-{
+public class PlayerView {
 	private String userID; //Name of current user
 	private double userBalance; // current user's balance
-	public ArrayList<Business> userBusinesses; //list of businesses owned by current user
 	
 	private static Scanner scan; //class that can take in input from user
-	public ArrayList<String> businessesAvailableToPurchase = new ArrayList<String>();
-	private Owner linkToOwner;
-
+	private Player linkToPlayer;
+	
+	public ArrayList<Owner> defaultOwners;
 	/*
 	 * Since this is a view class it receives info about the user it is displaying to
 	 * so the constructor below takes in an Owner object
 	 */
-	OwnerView(Owner ownerInfo)  
+	PlayerView(Player playerInfo)  
 	{
-		this.linkToOwner = ownerInfo;
-		this.userID = ownerInfo.username;
-		this.userBalance = ownerInfo.getBalance();
-		this.userBusinesses = ownerInfo.getBusinesses();
-		businessesAvailableToPurchase.add("Casino");
+		this.linkToPlayer = playerInfo;
+		this.userID = playerInfo.username;
+		this.userBalance = playerInfo.getBalance();
+		initializeDefaultClasses();
+	}
+	
+	public void initializeDefaultClasses()
+	{
+		Owner ElonMusk = new Owner("ElonMusk78", "dorwassp", "elmo0457@spacex.com");
+		Owner MarkZuckerberg = new Owner("MarkyMark", "qwertyuiop", "Mark.Zuckerberg@facebook.com");
+		Owner BillGates = new Owner("IllGates", "PCMasterRace", "originalgangSTAR@microsoft.com");
+		
+		Casino Bellagio = new Casino("The Bellagio", ElonMusk.username);
+		Casino Aria = new Casino("The Aria", ElonMusk.username);
+		Casino Wynn = new Casino("The Wynn", MarkZuckerberg.username);
+		Casino CeasersPalace = new Casino("Ceaser's Palace", BillGates.username);
+		Casino MonteCarlo = new Casino("The MonteCarlo", BillGates.username);
+		
+		SimpleGame CardDrawing = new SimpleGame(Bellagio, "Shot in the dark draw");
+		ColorGameDecorator Roullette = new ColorGameDecorator(Bellagio, "Jungle Roullette");
+		FixedBetDecorator Slots = new FixedBetDecorator(Aria, "007 Slots", 70.0);
+		FixedBetDecorator Slots2 = new FixedBetDecorator(Wynn, "Tron Slots", 120.0);
+		DynamicBetDecorator MachinePoker = new DynamicBetDecorator(Wynn, "Poker of the Caribean", 10.0, 500.0);
+		DynamicBetDecorator CelebrityPoker = new DynamicBetDecorator(Wynn, "High Stakes WPT Poker", 1000.0, 15000.0);
+		FixedBetDecorator Slots3 = new FixedBetDecorator(CeasersPalace, "Back to the Future Slots", 5.0);
+		ColorGameDecorator Roullette2 = new ColorGameDecorator(MonteCarlo, "Paris Roullette");
+
+		ArrayList<Game> BellagioGames = new ArrayList<Game>();
+		ArrayList<Game> AriaGames = new ArrayList<Game>();
+		ArrayList<Game> WynnGames = new ArrayList<Game>();
+		ArrayList<Game> CeasersPalaceGames = new ArrayList<Game>();
+		ArrayList<Game> MonteCarloGames = new ArrayList<Game>();
+		
+		BellagioGames.add(CardDrawing);
+		BellagioGames.add(Roullette);
+		
+		AriaGames.add(Slots);
+		
+		WynnGames.add(Slots2);
+		WynnGames.add(MachinePoker);
+		WynnGames.add(CelebrityPoker);
+		
+		CeasersPalaceGames.add(Slots3);
+		
+		MonteCarloGames.add(Roullette2);
+		
+		
+		Bellagio.setGamesInCasino(BellagioGames);
+		Aria.setGamesInCasino(AriaGames);
+		Wynn.setGamesInCasino(WynnGames);
+		CeasersPalace.setGamesInCasino(CeasersPalaceGames);
+		MonteCarlo.setGamesInCasino(MonteCarloGames);
+		
+		ArrayList<Business> ElonsBusinesses = new ArrayList<Business>();
+		ArrayList<Business> MarksBusinesses = new ArrayList<Business>();
+		ArrayList<Business> BillsBusinesses = new ArrayList<Business>();
+		
+		ElonsBusinesses.add(Bellagio);
+		ElonsBusinesses.add(Aria);
+		MarksBusinesses.add(Wynn);
+		BillsBusinesses.add(CeasersPalace);
+		BillsBusinesses.add(MonteCarlo);
+		
+		ElonMusk.setBusinesses(ElonsBusinesses);
+		MarkZuckerberg.setBusinesses(MarksBusinesses);
+		BillGates.setBusinesses(BillsBusinesses);
+
+		defaultOwners.add(ElonMusk);
+		defaultOwners.add(MarkZuckerberg);
+		defaultOwners.add(BillGates);
+		
 	}
 	
 	/*
@@ -44,7 +99,7 @@ public class OwnerView
 	 */
 	public void displayManageBusinessScreen ()
 	{
-		System.out.println("Hello " + userID + ", manage your businesses!");
+		System.out.println("Casino Browser");
 		System.out.println("Current Worth: " +  userBalance);
 		System.out.println("---------------------------------------------------------------------------------------");
 		System.out.println("Business Name | Business Type | Net gain/loss | Open | Protect | Passcode");

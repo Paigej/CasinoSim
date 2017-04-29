@@ -28,20 +28,7 @@ public class Owner extends User {
 		this.setBusinesses(userBusinesses);
 	}
 
-	// change to private
-	//public void removeUser(String user) {
-	//}
-
-	// Implement game first
-	// change to private
-	//public void buyBusiness(String busType, String busName){
-	//}
-
-	// Implement game first
-	// change to private
-	//public void sellBusiness(String busType, String busName){
-	//}
-
+	
 	public ArrayList<Business> getBusinesses() {
 		return businesses;
 	}
@@ -58,8 +45,4 @@ public class Owner extends User {
 		return activeBusinessID;
 	}
 
-	// TODO: figure out where to find the business object, only passing in the ID
-	//public void toggleOpenClose(String businessID) {
-	//	businessID.changeOpenStatus();
-	//}
 }

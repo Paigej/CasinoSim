@@ -197,7 +197,10 @@ public class NewUserView {
 			}
 			else if (newUser instanceof Player)
 			{
-				System.out.println("Taken to Player Screen");
+				Player newUserAsPlayer = (Player) newUser;
+				PlayerView PlayersScreen = new PlayerView(newUserAsPlayer);
+				ownersScreen.displayManageBusinessScreen();
+				ownersScreen.displayManageBusinessOptions();
 			}
 		}	
 	}
