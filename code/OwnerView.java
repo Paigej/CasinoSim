@@ -132,16 +132,30 @@ public class OwnerView
 		else
 		{
 			System.out.println("Please type the name of the business:");
+			ArrayList<String> businessesNames = new ArrayList<String>();
 			for(int i = 0; i < userBusinesses.size(); i = i + 1) 
 			{
 				System.out.println(userBusinesses.get(i).name +" | " + 
 						userBusinesses.get(i).getClass() + " | " + userBusinesses.get(i).getNetGain()
 						+ " | " + userBusinesses.get(i).open + " | " +
 						userBusinesses.get(i).getIsPrivate() + " | " + userBusinesses.get(i).getPasscode());
+				businessesNames.add(userBusinesses.get(i).name);
 			}
-			scan = new Scanner(System.in);
-			String businessToBeEdited = scan.nextLine();
-			System.out.println(businessToBeEdited);
+			boolean validResponse = false;
+			while (validResponse == false)
+			{
+				scan = new Scanner(System.in);
+				String businessToBeEdited = scan.nextLine();
+				if (businessesNames.contains(businessToBeEdited))
+				{
+					System.out.println("Call modify casino");
+					return;
+				}
+				else
+				{
+					System.out.println("Please enter a valid business name.");
+				}
+			}
 		}
 	}
 	
@@ -197,7 +211,6 @@ public class OwnerView
 		}
 	}
 	
-	//NEED TO ADD FUNCTIONALITY TO CHECK USERS BALANCE
 	public void createCasino()
 	{
 		int userPaymentVerification = verifyOwnerFunds(10000.0);
