@@ -212,6 +212,12 @@ public class OwnerView
 					businessToBeModified.getIsPrivate() + " | " + "Password: " + businessToBeModified.getPasscode());
 			System.out.println("Select an aspect to modify, or if"
 					+ " you would like to sell the Business type 'Sell'.");
+			boolean isCasino = false;
+			if (businessToBeModified instanceof Casino)
+			{
+				System.out.println("Since this is a Casino, you may also view your games by typing 'Games'.");
+				isCasino = true;
+			}
 			String userDecision = scan.nextLine();
 			if (userDecision.indexOf("sell") != -1 || userDecision.indexOf("Sell") != -1)
 			{
@@ -304,10 +310,16 @@ public class OwnerView
 				displayManageBusinessOptions();
 				return;
 			}
+			else if (userDecision.toLowerCase().indexOf("games") != -1 && isCasino == true)
+			{
+				
+				return;
+			}
 			else
 			{
 				System.out.println("Please type 'Sell, 'Name', 'Open', 'Private', or 'Password'");
 			}
+			
 		}
 	}
 	
