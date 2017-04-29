@@ -92,15 +92,7 @@ public class PlayerView {
 		
 	}
 	
-	/*
-	 * Pre-req: NA
-	 * 
-	 * Initial message displayed to Owner. This is based of the UI mock-up in 
-	 * part2.pdf
-	 * Loops through User's businesses and displays info about each one
-	 * 
-	 * Post: NA
-	 */
+
 	public void displayMainPlayerScreen ()
 	{
 		System.out.println("Casino Browser");
@@ -112,19 +104,21 @@ public class PlayerView {
 		{
 			for (Business currentBusiness: defaultOwners.get(i).businesses)
 			{
-				System.out.println(currentBusiness.name);
+				if (currentBusiness instanceof Casino)
+				{
+				Casino currentCasino = (Casino) currentBusiness;
+				System.out.println(PrettyPrint.prettyPrintCasinoForPlayer(currentCasino));
+				}
+				else
+				{
+					System.out.println("REQUIRES BUSINESS EXTENDIBILITY");
+				}
 			}
 		}
 
 	}
 	
-	/*
-	 * Pre-req: displayManageBusinessScreen should be called
-	 * 
-	 * Takes in input from Owner about editing or buying a business
-	 * 
-	 * Post: Edit or buy screen is displayed
-	 */
+
 	
 	
 }

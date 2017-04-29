@@ -30,4 +30,9 @@ public class PrettyPrint {
 			return ("PRINT ERROR");
 		}
 	}
+	
+	public static String prettyPrintCasinoForPlayer(Casino casino)
+	{
+		return (casino.name + " | Owner: "+casino.getOwnerID()+" | AvailableGames: "+casino.getGamesInCasino().size()+" | Casino Worth: "+ (100000.0 +casino.income));
+	}
 }
