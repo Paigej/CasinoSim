@@ -164,7 +164,7 @@ public class OwnerView
 	
 	public void updateOwner(String userID, double userBalance, ArrayList<Business> userBusinesses)
 	{
-		System.out.println(linkToOwner);
+		linkToOwner.updateOwner(userID, userBalance, userBusinesses);
 	}
 	
 	public void sellBusiness(Business businessToBeSold)
