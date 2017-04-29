@@ -45,8 +45,8 @@ public class Casino extends Business {
 	
 	public void removeUser(String user) 
 	{
-		int positionOfUserInList = userNames.indexOf(user);
-		users.remove(positionOfUserInList);
+		int positiosnOfUserInList = userNames.indexOf(user);
+		users.remove(positiosnOfUserInList);
 		setUsers(users);
 	}
 	
