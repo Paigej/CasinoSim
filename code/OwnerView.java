@@ -162,7 +162,7 @@ public class OwnerView
 		}
 	}
 	
-	public void updateOwner(String userID, double userBalance, ArrayList<Business> userBusinesses)
+	public void updateOwner()
 	{
 		linkToOwner.updateOwner(userID, userBalance, userBusinesses);
 	}
@@ -180,7 +180,7 @@ public class OwnerView
 			{
 				userBalance = userBalance + 70000.0;
 				userBusinesses.remove(businessToBeSold);
-				updateOwner(userID, userBalance, userBusinesses);
+				updateOwner();
 				businessToBeSold = null;
 				displayManageBusinessScreen();
 				displayManageBusinessOptions();
