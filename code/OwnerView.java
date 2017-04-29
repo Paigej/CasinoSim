@@ -18,6 +18,7 @@ public class OwnerView
 	
 	private static Scanner scan; //class that can take in input from user
 	public ArrayList<String> businessesAvailableToPurchase = new ArrayList<String>();
+	private Owner linkToOwner;
 
 	/*
 	 * Since this is a view class it receives info about the user it is displaying to
@@ -25,6 +26,7 @@ public class OwnerView
 	 */
 	OwnerView(Owner ownerInfo)  
 	{
+		this.linkToOwner = ownerInfo;
 		this.userID = ownerInfo.username;
 		this.userBalance = ownerInfo.getBalance();
 		this.userBusinesses = ownerInfo.getBusinesses();
@@ -160,6 +162,11 @@ public class OwnerView
 		}
 	}
 	
+	public void updateOwner(String userID, double userBalance, ArrayList<Business> userBusinesses)
+	{
+		System.out.println(linkToOwner);
+	}
+	
 	public void sellBusiness(Business businessToBeSold)
 	{
 		System.out.println("Selling " + businessToBeSold.name + " would give you $70,000");
@@ -173,7 +180,7 @@ public class OwnerView
 			{
 				userBalance = userBalance + 70000.0;
 				userBusinesses.remove(businessToBeSold);
-				//NEED UPDATE USER METHOD
+				updateOwner(userID, userBalance, userBusinesses);
 				businessToBeSold = null;
 				displayManageBusinessScreen();
 				displayManageBusinessOptions();

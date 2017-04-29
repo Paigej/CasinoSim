@@ -21,7 +21,12 @@ public class Owner extends User {
 		this.businesses = new ArrayList<Business>();
 	}
 	
-	
+	public void updateOwner(String userID, double userBalance, ArrayList<Business> userBusinesses)
+	{
+		this.username = userID;
+		this.updateBalance(userBalance);
+		this.setBusinesses(userBusinesses);
+	}
 
 	// change to private
 	//public void removeUser(String user) {

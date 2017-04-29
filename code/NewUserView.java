@@ -191,6 +191,7 @@ public class NewUserView {
 			if (newUser instanceof Owner)
 			{
 				Owner newUserAsOwner = (Owner) newUser;
+				System.out.println(newUserAsOwner);
 				OwnerView ownersScreen = new OwnerView(newUserAsOwner);
 				ownersScreen.displayManageBusinessScreen();
 				ownersScreen.displayManageBusinessOptions();
