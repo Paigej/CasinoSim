@@ -14,8 +14,6 @@ public class Casino extends Business {
 	private ArrayList<User> users;
 	private ArrayList<String> userNames;
 
-	public double income;
-	public double loss;
 
 	// Insert constructor here
 
@@ -23,8 +21,6 @@ public class Casino extends Business {
 		super(name, ownerID);
 		this.setGamesInCasino(new ArrayList<Game>());
 		this.users = new ArrayList<User>();
-		this.income = 0.0;
-		this.loss = 0.0;
 	}
 
 	public ArrayList<User> getUsers() {

@@ -13,11 +13,13 @@ public abstract class Business {
 
 	private boolean IsPrivate;
 	private Owner ownerID;
-	private double netGain;
 
 	public String name;
 	public boolean open;
 
+	public double income;
+	public double loss;
+	
 	Business(String _name, Owner _ownerID) {
 		this.name = _name;
 		this.open = true;
@@ -25,6 +27,8 @@ public abstract class Business {
 		this.passcode = "";
 		this.id = 2;
 		this.setOwner(_ownerID);
+		this.income = 0.0;
+		this.loss = 0.0;
 	}
 
 	public void setIsPrivate(boolean isPrivate) {
@@ -64,12 +68,9 @@ public abstract class Business {
 	}
 
 	public double getNetGain() {
-		return netGain;
+		return income - loss;
 	}
 
-	public void setNetGain(double netGain) {
-		this.netGain = netGain;
-	}
 	
 	public String getPasscode() {
 		return passcode;
