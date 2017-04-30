@@ -189,6 +189,11 @@ public class PlayerView {
 				//System.out.println(casinoGames.get(positionInList).playGame(linkToPlayer, 50.0));
 				validResponse = true;
 			}
+			else if (userSelection.toLowerCase().equals("leave"))
+			{
+				displayMainPlayerScreen();
+				validResponse = true;
+			}
 			else
 			{
 				System.out.println("Please type the name of one of the game's names above or 'Leave'.");
@@ -201,23 +206,76 @@ public class PlayerView {
 	{
 		if (game instanceof SimpleGame)
 		{
+			System.out.println("How much would you like to bet? Current Worth: "+ linkToPlayer.getBalance());
+			Double doubBet = 0.0;
+			boolean validResponse = false;
+			while (validResponse == false)
+			{
+				String bet  = scan.nextLine();
+				try
+				{
+				  doubBet = Double.parseDouble(bet);
+				  if (doubBet > 0.0 && doubBet < userBalance)
+				  {
+					  validResponse = true;
+				  }
+				}
+				catch(NumberFormatException e)
+				{
+				  System.out.println("Please specify a number greater than 0 and within your worth");
+				}
+			}
 			SimpleGame gameMadeSimple = (SimpleGame) game;
-			System.out.println(gameMadeSimple.playGame(linkToPlayer, 500.0));
+			double winnings = (gameMadeSimple.playGame(linkToPlayer, doubBet));
+			if (winnings < 0)
+			{
+				System.out.println("Sorry you lost $"+winnings);
+			}
+			else
+			{
+				System.out.println("You won $"+winnings+"!");
+			}
+			userBalance = userBalance + winnings;
+			linkToPlayer.setBalance(userBalance);
 		}
 		else if (game instanceof ColorGameDecorator)
 		{
 			ColorGameDecorator gameMadeColor = (ColorGameDecorator) game;
-			System.out.println(gameMadeColor.playGame(linkToPlayer, 600.0, 1, 7));
+			double winnings =(gameMadeColor.playGame(linkToPlayer, 600.0, 1, 7));
+			if (winnings < 0)
+			{
+				System.out.println("Sorry you lost $"+winnings);
+			}
+			else
+			{
+				System.out.println("You won $"+winnings+"!");
+			}
 		}
 		else if (game instanceof FixedBetDecorator)
 		{
 			FixedBetDecorator gameMadeFixed = (FixedBetDecorator) game;
-			System.out.println(gameMadeFixed.playGame(linkToPlayer, 700.0));
+			double winnings =(gameMadeFixed.playGame(linkToPlayer, 700.0));
+			if (winnings < 0)
+			{
+				System.out.println("Sorry you lost $"+winnings);
+			}
+			else
+			{
+				System.out.println("You won $"+winnings+"!");
+			}
 		}
 		else if (game instanceof DynamicBetDecorator)
 		{
 			DynamicBetDecorator gameMadeDynamic = (DynamicBetDecorator) game;
-			System.out.println(gameMadeDynamic.playGame(linkToPlayer, 800.0));
+			double winnings =(gameMadeDynamic.playGame(linkToPlayer, 800.0));
+			if (winnings < 0)
+			{
+				System.out.println("Sorry you lost $"+winnings);
+			}
+			else
+			{
+				System.out.println("You won $"+winnings+"!");
+			}
 		}
 		else
 		{
@@ -228,7 +286,7 @@ public class PlayerView {
 	}
 
 	private void repeatPlay(Game game) {
-		System.out.println("Play Agin?");
+		System.out.println("Play Again?");
 		scan = new Scanner(System.in);
 		while (true)
 		{

@@ -50,15 +50,18 @@ public class ColorGameDecorator extends GameDecorator {
 		int randomColor =  rand.nextInt(2) + 1;
 		if (color == randomColor && boardNumber == randomBoardNumber)
 		{
+			System.out.println("Correct Spot on Board!! MAX PAYOUT");
 			return (numberOfSpaces * payoffRate * bet); 
 			
 		}
 		else if (boardNumber == randomBoardNumber)
 		{
+			System.out.println("Correct Number");
 			return ((numberOfSpaces / numberOfColors) * payoffRate * bet); 
 		}
 		else if (color == randomColor)
 		{
+			System.out.println("Correct color!");
 			return (numberOfColors * payoffRate * bet); 
 		}
 		else
