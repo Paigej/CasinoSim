@@ -25,11 +25,17 @@ public class SimpleGame extends Game {
 		int randomNumber = rand.nextInt(100) + 1;
 		if (randomNumber < oddsOfWinPercentage)
 		{
-			//Win
-			return ((oddsOfWinPercentage * payoffRate) * bet);
+			double winnings = ((oddsOfWinPercentage * payoffRate) * bet);
+			this.getOwningCasino().getOwnerID().increaseBalance(- winnings);
+			this.getOwningCasino().income = this.getOwningCasino().income - winnings;
+			this.getOwningCasino().loss = this.getOwningCasino().loss + winnings;
+			return winnings;
 		}
 		else
 		{
+			this.getOwningCasino().getOwnerID().increaseBalance(bet);
+			this.getOwningCasino().income = this.getOwningCasino().income + bet;
+			this.getOwningCasino().loss = this.getOwningCasino().loss - bet;
 			return (0.0 - bet);
 		}
 	}

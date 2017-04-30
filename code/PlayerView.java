@@ -2,7 +2,6 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class PlayerView {
-	private String userID; //Name of current user
 	private double userBalance; // current user's balance
 	
 	private static Scanner scan; //class that can take in input from user
@@ -10,6 +9,7 @@ public class PlayerView {
 	
 	public ArrayList<Owner> defaultOwners = new ArrayList<Owner>();
 	public ArrayList<String> defaultBusinessNames = new ArrayList<String>();
+	private Scanner reader;
 	
 	/*
 	 * Since this is a view class it receives info about the user it is displaying to
@@ -18,7 +18,6 @@ public class PlayerView {
 	PlayerView(Player playerInfo)  
 	{
 		this.linkToPlayer = playerInfo;
-		this.userID = playerInfo.username;
 		this.userBalance = playerInfo.getBalance();
 		initializeDefaultClasses();
 	}
@@ -29,11 +28,11 @@ public class PlayerView {
 		Owner MarkZuckerberg = new Owner("MarkyMark", "qwertyuiop", "Mark.Zuckerberg@facebook.com");
 		Owner BillGates = new Owner("IllGates", "PCMasterRace", "originalgangSTAR@microsoft.com");
 		
-		Casino Bellagio = new Casino("The Bellagio", ElonMusk.username);
-		Casino Aria = new Casino("The Aria", ElonMusk.username);
-		Casino Wynn = new Casino("The Wynn", MarkZuckerberg.username);
-		Casino CeasersPalace = new Casino("Ceaser's Palace", BillGates.username);
-		Casino MonteCarlo = new Casino("The MonteCarlo", BillGates.username);
+		Casino Bellagio = new Casino("The Bellagio", ElonMusk);
+		Casino Aria = new Casino("The Aria", ElonMusk);
+		Casino Wynn = new Casino("The Wynn", MarkZuckerberg);
+		Casino CeasersPalace = new Casino("Ceaser's Palace", BillGates);
+		Casino MonteCarlo = new Casino("The MonteCarlo", BillGates);
 		
 		SimpleGame CardDrawing = new SimpleGame(Bellagio, "Shot in the dark draw");
 		ColorGameDecorator Roullette = new ColorGameDecorator(Bellagio, "Jungle Roullette");
@@ -240,8 +239,76 @@ public class PlayerView {
 		}
 		else if (game instanceof ColorGameDecorator)
 		{
+			System.out.println("How much would you like to bet? Current Worth: "+ linkToPlayer.getBalance());
+			Double doubBet = 0.0;
+			boolean validResponse = false;
+			while (validResponse == false)
+			{
+				String bet  = scan.nextLine();
+				try
+				{
+				  doubBet = Double.parseDouble(bet);
+				  if (doubBet > 0.0 && doubBet < userBalance)
+				  {
+					  validResponse = true;
+				  }
+				  else
+				  {
+					  System.out.println("What color would you like to bet on, Black or Red:");
+				  }
+				}
+				catch(NumberFormatException e)
+				{
+				  System.out.println("Please specify a number greater than 0 and within your worth");
+				}
+			}
+			validResponse = false;
+			int colorCode = -1;
+			while (validResponse == false)
+			{
+				String color  = scan.nextLine();
+				if (color.toLowerCase().equals("black"))
+				{
+					colorCode = 1;
+					validResponse = true;
+				}
+				else if (color.toLowerCase().equals("red"))
+				{
+					colorCode = 2;
+					validResponse = true;
+				}
+				else
+				{
+				  System.out.println("Please type 'Black' or 'Red'");
+				}
+			}
+			System.out.println("What space would you like to bet on: 1-19?");
+			String space = "";
+			int intSpace = 0;
+			validResponse = false;
+			reader = new Scanner(System.in);
+			while (validResponse == false)
+			{
+				space = reader.nextLine();
+				try
+				{
+					intSpace = Integer.parseInt(space);
+					if (intSpace > 0 && intSpace < 20)
+					{
+						validResponse = true;
+					}
+					else
+					{
+						System.out.println("Please specify a number between 1 and 19.");
+					}
+				}
+				catch(NumberFormatException e)
+				{
+				  System.out.println("Please specify a number between 1 and 19.");
+				}
+			}
 			ColorGameDecorator gameMadeColor = (ColorGameDecorator) game;
-			double winnings =(gameMadeColor.playGame(linkToPlayer, 600.0, 1, 7));
+			double winnings = (gameMadeColor.playGame(linkToPlayer, doubBet, colorCode, intSpace));
 			if (winnings < 0)
 			{
 				System.out.println("Sorry you lost $"+winnings);
@@ -250,23 +317,63 @@ public class PlayerView {
 			{
 				System.out.println("You won $"+winnings+"!");
 			}
+			userBalance = userBalance + winnings;
+			linkToPlayer.setBalance(userBalance);
 		}
 		else if (game instanceof FixedBetDecorator)
 		{
 			FixedBetDecorator gameMadeFixed = (FixedBetDecorator) game;
-			double winnings =(gameMadeFixed.playGame(linkToPlayer, 700.0));
-			if (winnings < 0)
+			Double fixedBet = gameMadeFixed.getFixedBetAmount();
+			System.out.println("The bet for this game is: "+fixedBet);
+			if (fixedBet < userBalance)
 			{
-				System.out.println("Sorry you lost $"+winnings);
+				double winnings =(gameMadeFixed.playGame(linkToPlayer, fixedBet));
+				if (winnings < 0)
+				{
+					System.out.println("Sorry you lost $"+winnings);
+				}
+				else
+				{
+					System.out.println("You won $"+winnings+"!");
+				}
+				userBalance = userBalance + winnings;
+				linkToPlayer.setBalance(userBalance);
 			}
 			else
 			{
-				System.out.println("You won $"+winnings+"!");
+				System.out.println("You do not have the required funds: "+ userBalance);
 			}
 		}
 		else if (game instanceof DynamicBetDecorator)
 		{
 			DynamicBetDecorator gameMadeDynamic = (DynamicBetDecorator) game;
+			double min = gameMadeDynamic.getMinBet();
+			double max = gameMadeDynamic.getMaxBet();
+			
+			System.out.println("How much would you like to bet? Current Worth: "+ linkToPlayer.getBalance());
+			Double doubBet = 0.0;
+			boolean validResponse = false;
+			while (validResponse == false)
+			{
+				String bet  = scan.nextLine();
+				try
+				{
+				  doubBet = Double.parseDouble(bet);
+				  if (doubBet > min && doubBet < userBalance)
+				  {
+					  if (doubBet < max)
+					  {
+					  validResponse = true;
+					  }
+				  }
+				}
+				catch(NumberFormatException e)
+				{
+				  System.out.println("This game requires a minimum bet of "+min+" and a maximum of "+max+". "
+				  		+ "Please specify an amount in this range within your worth.");
+				}
+			}
+			
 			double winnings =(gameMadeDynamic.playGame(linkToPlayer, 800.0));
 			if (winnings < 0)
 			{
@@ -276,6 +383,8 @@ public class PlayerView {
 			{
 				System.out.println("You won $"+winnings+"!");
 			}
+			userBalance = userBalance + winnings;
+			linkToPlayer.setBalance(userBalance);
 		}
 		else
 		{

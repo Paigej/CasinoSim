@@ -19,7 +19,7 @@ public class Casino extends Business {
 
 	// Insert constructor here
 
-	Casino(String name, String ownerID) {
+	Casino(String name, Owner ownerID) {
 		super(name, ownerID);
 		this.setGamesInCasino(new ArrayList<Game>());
 		this.users = new ArrayList<User>();

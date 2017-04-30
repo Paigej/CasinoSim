@@ -18,12 +18,13 @@ public abstract class Business {
 	public String name;
 	public boolean open;
 
-	Business(String name, String ownerID) {
-		this.name = name;
+	Business(String _name, Owner _ownerID) {
+		this.name = _name;
 		this.open = true;
 		this.IsPrivate = false;
 		this.passcode = "";
 		this.id = 2;
+		this.setOwner(_ownerID);
 	}
 
 	public void setIsPrivate(boolean isPrivate) {
@@ -58,7 +59,7 @@ public abstract class Business {
 		return ownerID;
 	}
 
-	public void Owner(Owner ownerID) {
+	public void setOwner(Owner ownerID) {
 		this.ownerID = ownerID;
 	}
 

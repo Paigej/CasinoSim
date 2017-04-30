@@ -33,6 +33,6 @@ public class PrettyPrint {
 	
 	public static String prettyPrintCasinoForPlayer(Casino casino)
 	{
-		return (casino.name + " | Owner: "+casino.getOwnerID()+" | AvailableGames: "+casino.getGamesInCasino().size()+" | Casino Worth: "+ (100000.0 +casino.income));
+		return (casino.name + " | Owner: "+casino.getOwnerID().username+" | AvailableGames: "+casino.getGamesInCasino().size()+" | Casino Worth: "+ (100000.0 +casino.income));
 	}
 }

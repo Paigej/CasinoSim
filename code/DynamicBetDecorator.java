@@ -47,11 +47,17 @@ public class DynamicBetDecorator extends GameDecorator {
 		int randomNumber = rand.nextInt(100) + 1;
 		if (randomNumber < (100 * oddsOfWin))
 		{
-			//Win
-			return (payoutMultiplier * bet);
+			double winnings = (payoutMultiplier * bet);
+			this.getOwningCasino().getOwnerID().increaseBalance(- winnings);
+			this.getOwningCasino().income = this.getOwningCasino().income - winnings;
+			this.getOwningCasino().loss = this.getOwningCasino().loss + winnings;
+			return winnings;
 		}
 		else
 		{
+			this.getOwningCasino().getOwnerID().increaseBalance(- bet);
+			this.getOwningCasino().income = this.getOwningCasino().income - bet;
+			this.getOwningCasino().loss = this.getOwningCasino().loss + bet;
 			return (0.0 - bet);
 		}
 	}

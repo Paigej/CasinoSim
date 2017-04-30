@@ -51,21 +51,36 @@ public class ColorGameDecorator extends GameDecorator {
 		if (color == randomColor && boardNumber == randomBoardNumber)
 		{
 			System.out.println("Correct Spot on Board!! MAX PAYOUT");
-			return (numberOfSpaces * payoffRate * bet); 
+			double winnings = (numberOfSpaces * payoffRate * bet); 
+			this.getOwningCasino().getOwnerID().increaseBalance(- winnings);
+			this.getOwningCasino().income = this.getOwningCasino().income - winnings;
+			this.getOwningCasino().loss = this.getOwningCasino().loss + winnings;
+			return winnings;
 			
 		}
 		else if (boardNumber == randomBoardNumber)
 		{
 			System.out.println("Correct Number");
-			return ((numberOfSpaces / numberOfColors) * payoffRate * bet); 
+			double winnings = ((numberOfSpaces / numberOfColors) * payoffRate * bet); 
+			this.getOwningCasino().getOwnerID().increaseBalance(- winnings);
+			this.getOwningCasino().income = this.getOwningCasino().income - winnings;
+			this.getOwningCasino().loss = this.getOwningCasino().loss + winnings;
+			return winnings;
 		}
 		else if (color == randomColor)
 		{
 			System.out.println("Correct color!");
-			return (numberOfColors * payoffRate * bet); 
+			double winnings = (numberOfColors * payoffRate * bet); 
+			this.getOwningCasino().getOwnerID().increaseBalance(- winnings);
+			this.getOwningCasino().income = this.getOwningCasino().income - winnings;
+			this.getOwningCasino().loss = this.getOwningCasino().loss + winnings;
+			return winnings;
 		}
 		else
 		{
+			this.getOwningCasino().getOwnerID().increaseBalance(bet);
+			this.getOwningCasino().income = this.getOwningCasino().income + bet;
+			this.getOwningCasino().loss = this.getOwningCasino().loss - bet;
 			return (0.0 - bet);
 		}
 	}

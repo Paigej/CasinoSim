@@ -489,7 +489,7 @@ public class OwnerView
 		System.out.println("Please enter a unique name for this casino:");
 		scan = new Scanner(System.in);
 		String casinoName = scan.nextLine();
-		Casino usersCasino = new Casino(casinoName, userID);
+		Casino usersCasino = new Casino(casinoName, linkToOwner);
 		userBalance = userBalance - 100000.0;
 		System.out.println("Congratulations! You are now the proud owner of " + casinoName +"!");
 		System.out.println("All casinos must have at least 1 game, so lets add one!");
