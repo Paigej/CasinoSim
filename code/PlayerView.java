@@ -254,7 +254,7 @@ public class PlayerView {
 				  }
 				  else
 				  {
-					  System.out.println("What color would you like to bet on, Black or Red:");
+					  System.out.println("Please specify a number greater than 0 and within your worth");
 				  }
 				}
 				catch(NumberFormatException e)
@@ -264,6 +264,7 @@ public class PlayerView {
 			}
 			validResponse = false;
 			int colorCode = -1;
+			System.out.println("What color would you like to bet on, Black or Red:");
 			while (validResponse == false)
 			{
 				String color  = scan.nextLine();
