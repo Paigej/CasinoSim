@@ -1,5 +1,5 @@
 /******************************************************************************
- *  Author(s):    Michael Condon
+ *  Author(s):    Michael Condon, Paige Johnson
  *
  *  Compilation:  javac OwnerView.java
  *  
@@ -48,14 +48,29 @@ public class OwnerView
 		System.out.println("Current Worth: " +  userBalance);
 		System.out.println("---------------------------------------------------------------------------------------");
 		System.out.println("Business Name | Business Type | Net gain/loss | Open | Protect | Passcode");
+		System.out.println("---------------------------------------------------------------------------------------");
+
 
 		for(int i = 0; i < userBusinesses.size(); i = i + 1) 
 		{
-			System.out.println(userBusinesses.get(i).name +" | " + 
-					userBusinesses.get(i).getClass() + " | " + userBusinesses.get(i).getNetGain()
-					+ " | " + userBusinesses.get(i).open + " | " +
-					userBusinesses.get(i).getIsPrivate() + " | " + userBusinesses.get(i).getPasscode());
+//			System.out.println(userBusinesses.get(i).name +"    |    " + 
+//					userBusinesses.get(i).getClass() + " | " + userBusinesses.get(i).getNetGain()
+//					+ " | " + userBusinesses.get(i).open + " | " +
+//					userBusinesses.get(i).getIsPrivate() + " | " + userBusinesses.get(i).getPasscode());
+
+			String passcode = "";
+			if (userBusinesses.get(i).getPasscode() == "")
+			{
+				passcode = "Casino is Public";
+			}
+			else{
+				passcode = userBusinesses.get(i).getPasscode();
+			}
+			System.out.format("%-13s | %-13s | %-13s | %-4s | %-7s | %-7s\n", userBusinesses.get(i).name, userBusinesses.get(i).getClass().getSimpleName() , userBusinesses.get(i).getNetGain(),userBusinesses.get(i).open,userBusinesses.get(i).getIsPrivate(), passcode);
+			
 		}
+		System.out.println("---------------------------------------------------------------------------------------");
+
 
 	}
 	
