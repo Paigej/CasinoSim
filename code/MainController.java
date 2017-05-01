@@ -12,7 +12,8 @@ public class MainController {
 	
 	public static void main(String[] args) 
 	{
-		NewUserView.displayView();
+		NewUserView userView = new NewUserView();
+		userView.displayView();
 	}
 
 }

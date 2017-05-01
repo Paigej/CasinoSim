@@ -8,7 +8,8 @@
  ******************************************************************************/
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 
@@ -17,8 +18,39 @@ public class NewUserView {
 	//Object used to get input from user (Command Line UI)
 	private static Scanner scan;
 	
-	List<Owner> Owners = new ArrayList<Owner>();
-	List<Player> Players = new ArrayList<Player>();
+	static ArrayList<Owner> Owners = new ArrayList<Owner>();
+	static ArrayList<String> ownerNames = new ArrayList<String>();
+	static ArrayList<Player> Players = new ArrayList<Player>();
+	static ArrayList<String> playerNames = new ArrayList<String>();
+
+	static Map<String, String> userLogins = new HashMap<String, String>();
+	
+
+
+	
+	
+	
+	NewUserView()
+	{
+		Owner paigeAsAnOwner = new Owner ("PaigeO", "password", "paigeSecretlyLikes50Cent@aol.com");
+		Casino flamingo = new Casino("Flamingo", paigeAsAnOwner);
+		ColorGameDecorator roulette = new ColorGameDecorator(flamingo, "Roulette");
+		ArrayList<Game> flamingoGames = new ArrayList<Game>();
+		flamingoGames.add(roulette);
+		flamingo.setGamesInCasino(flamingoGames);
+		ArrayList<Business> paigesBusinesses = new ArrayList<Business>();
+		paigesBusinesses.add(flamingo);
+		paigeAsAnOwner.setBusinesses(paigesBusinesses);
+		ownerNames.add(paigeAsAnOwner.username);
+
+		
+		Player paigeAsAPlayer = new Player("PaigeP", "password", "paigeSecretlyLikes50Cent@aol.com");
+		Owners.add(paigeAsAnOwner);
+		Players.add(paigeAsAPlayer);
+		userLogins.put(paigeAsAnOwner.username, paigeAsAnOwner.getPassword());
+		userLogins.put(paigeAsAPlayer.username, paigeAsAPlayer.getPassword());
+		playerNames.add(paigeAsAPlayer.username);
+	}
 
 
 
@@ -105,7 +137,17 @@ public class NewUserView {
 		String password = scan.nextLine();
 		if (verifyLogin(username, password) > 0)
 		{
-			System.out.println("Log in successful");
+			if (ownerNames.contains(username))
+			{
+			OwnerView ownersScreen = new OwnerView(Owners.get(ownerNames.indexOf(username)));
+			ownersScreen.displayManageBusinessScreen();
+			ownersScreen.displayManageBusinessOptions();
+			}
+			else
+			{
+				PlayerView PlayersScreen = new PlayerView(Players.get(playerNames.indexOf(username)));
+				PlayersScreen.displayMainPlayerScreen();
+			}
 		}
 		else
 		{
@@ -116,12 +158,26 @@ public class NewUserView {
 	}
 	
 	//Need to figure out the database stuff for this function 
-	public static int verifyLogin(String username, String password){
-		/*
-		 * 
-		 *Database verification here
-		 */
-		return 1;
+	public static int verifyLogin(String username, String password)
+	{
+		String isPresent = userLogins.get(username);
+		if (isPresent != null) 
+		{
+		    if (isPresent.equals(password))
+		    {
+		    	return 1;
+		    }
+		    else
+		    {
+		    	System.out.println("Invalid Password");
+		    	return -1;
+		    }
+		} 
+		else 
+		{
+			System.out.println("Invalid Username");
+			return -1;
+		}
 	}
 	
 	
@@ -177,7 +233,7 @@ public class NewUserView {
 	 * 
 	 */
 	
-	public static void displayView() 
+	public void displayView() 
 	{
 		printIntroMessage();
 		int loginOrSignup = choseLogIn();
