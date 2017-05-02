@@ -99,7 +99,9 @@ public class PlayerView {
 		System.out.println("Casino Browser");
 		System.out.println("Current Worth: " +  userBalance);
 		System.out.println("---------------------------------------------------------------------------------------");
-		System.out.println("Casino Name | Owner | NumberOfGames | OwnerWorth");
+		System.out.println("Casino Name     | Owner      | NumberOfGames | Casino Worth");
+		System.out.println("---------------------------------------------------------------------------------------");
+
 		defaultBusinessNames.clear();
 		ArrayList<Business> defaultBusinesses = new ArrayList<Business>();
 		for(int i = 0; i < defaultOwners.size(); i = i + 1) 
@@ -111,7 +113,8 @@ public class PlayerView {
 				if (currentBusiness instanceof Casino)
 				{
 				Casino currentCasino = (Casino) currentBusiness;
-				System.out.println(PrettyPrint.prettyPrintCasinoForPlayer(currentCasino));
+				//System.out.format(PrettyPrint.prettyPrintCasinoForPlayer(currentCasino));
+				PrettyPrint.prettyPrintCasinoForPlayer(currentCasino);
 				}
 				else
 				{
@@ -119,6 +122,7 @@ public class PlayerView {
 				}
 			}
 		}
+		System.out.println("---------------------------------------------------------------------------------------");
 		return mainPlayerScreenPrompt(defaultBusinesses);
 		
 	}
@@ -166,8 +170,9 @@ public class PlayerView {
 	}
 	private void enterCasino(Casino casino)
 	{
-		System.out.println(PrettyPrint.prettyPrintCasinoForPlayer(casino));
-		System.out.println("--------------------");
+		System.out.println("");
+		PrettyPrint.prettyPrintCasinoForPlayer(casino);
+		System.out.println("--------------------------------------------------------------");
 		ArrayList<Game> casinoGames = casino.getGamesInCasino();
 		ArrayList<String> casinoGameNames = new ArrayList<String>();
 		for (Game currentGame : casinoGames)
