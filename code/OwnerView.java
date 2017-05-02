@@ -525,19 +525,30 @@ public class OwnerView
 	
 	public void printGameOptions()
 	{
+
 		System.out.println("There are 4 options for games:");
+		System.out.println("---------------------------------------------------------------------------------------");
+
 		System.out.println("Simple Game: A player bets any amount of money and "
 				+ "we draw a card from a deck. "
-				+ "If it is a face card they win 2.5x their bet. Cost: $10,000, 37% odds of winning.");
+				+ "If it is \n a face card they win 2.5x their bet. Cost: $10,000, 37% odds of winning.");
+		System.out.println("---------------------------------------------------------------------------------------");
+
 		System.out.println("Strict Bet Game: Same as Simple Game, but the bet must "
-				+ "be between specified amounts. Player wins 2.1x their bet. Cost $15,000, 37% odds.");
+				+ "be between specified amounts.\n Player wins 2.1x their bet. Cost $15,000, 37% odds.");
+		System.out.println("---------------------------------------------------------------------------------------");
+
 		System.out.println("Fixed Bet Game: These are machine games. "
 				+ "Anything from slots to machine poker. "
-				+ "Bets are fixed, player wins 22x their bet. Cost $19,000 %3.7 odds." );
+				+ "Bets are \n fixed, player wins 22x their bet. Cost $19,000 %3.7 odds." );
+		System.out.println("---------------------------------------------------------------------------------------");
+
 		System.out.println("Color Game: These are table games like Roulette. Player "
-				+ "specifies a color, space, and bet. Player wins 1.6x their bet for correct color"
-				+ "16x their money for correct number. And 37x their money for both."
+				+ "specifies a color, space, and \n bet. Player wins 1.6x their bet for correct color"
+				+ "16x their money for correct number.\n And 37x their money for both."
 				+ "Cost $24,000 %50, 5.2%, 2.6% odds." );
+		System.out.println("---------------------------------------------------------------------------------------");
+
 	}
 	
 	public Game addGameToCasino(Casino usersCasino)
