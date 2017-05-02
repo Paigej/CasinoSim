@@ -238,7 +238,7 @@ public class NewUserView {
 	 * 
 	 */
 	
-	public void displayView() 
+	public static void displayView() 
 	{
 		printIntroMessage();
 		int loginOrSignup = choseLogIn();

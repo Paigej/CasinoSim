@@ -140,6 +140,7 @@ public class PlayerView {
 			}
 			else if (userSelection.toLowerCase().equals("exit"))
 			{
+				NewUserView.displayView();
 				return -1;
 			}
 			else
