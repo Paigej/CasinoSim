@@ -91,6 +91,17 @@ public class PlayerView {
 		defaultOwners.add(MarkZuckerberg);
 		defaultOwners.add(BillGates);
 		
+		Owner paigeAsAnOwner = new Owner ("PaigeO", "password", "paigeSecretlyLikes50Cent@aol.com");
+		Casino flamingo = new Casino("Flamingo", paigeAsAnOwner);
+		ColorGameDecorator roulette = new ColorGameDecorator(flamingo, "Roulette");
+		ArrayList<Game> flamingoGames = new ArrayList<Game>();
+		flamingoGames.add(roulette);
+		flamingo.setGamesInCasino(flamingoGames);
+		ArrayList<Business> paigesBusinesses = new ArrayList<Business>();
+		paigesBusinesses.add(flamingo);
+		paigeAsAnOwner.setBusinesses(paigesBusinesses);
+		defaultOwners.add(paigeAsAnOwner);
+		
 	}
 	
 
@@ -114,7 +125,7 @@ public class PlayerView {
 				{
 				Casino currentCasino = (Casino) currentBusiness;
 				//System.out.format(PrettyPrint.prettyPrintCasinoForPlayer(currentCasino));
-				PrettyPrint.prettyPrintCasinoForPlayer(currentCasino);
+				System.out.println(PrettyPrint.prettyPrintCasinoForPlayer(currentCasino));
 				}
 				else
 				{
