@@ -349,7 +349,7 @@ public class OwnerView
 		ArrayList<String> gameNames = new ArrayList<String>();
 		for (int i = 0; i < gamesInCasino.size(); i = i + 1)
 		{
-			System.out.println(PrettyPrint.prettyPrintGame(gamesInCasino.get(i)));
+			PrettyPrint.prettyPrintGame(gamesInCasino.get(i));
 			gameNames.add(gamesInCasino.get(i).name);
 		}
 		System.out.println("Would you like to buy a game, sell a game, or leave game menu?");

@@ -236,7 +236,7 @@ public class PlayerView {
 				try
 				{
 				  doubBet = Double.parseDouble(bet);
-				  if (doubBet > 0.0 && doubBet < userBalance)
+				  if (doubBet > 0.0 && doubBet <= userBalance)
 				  {
 					  validResponse = true;
 				  }
@@ -270,7 +270,7 @@ public class PlayerView {
 				try
 				{
 				  doubBet = Double.parseDouble(bet);
-				  if (doubBet > 0.0 && doubBet < userBalance)
+				  if (doubBet > 0.0 && doubBet <= userBalance)
 				  {
 					  validResponse = true;
 				  }
@@ -382,7 +382,7 @@ public class PlayerView {
 				try
 				{
 				  doubBet = Double.parseDouble(bet);
-				  if (doubBet > min && doubBet < userBalance)
+				  if (doubBet > min && doubBet <= userBalance)
 				  {
 					  if (doubBet < max)
 					  {
@@ -412,6 +412,11 @@ public class PlayerView {
 		else
 		{
 			System.out.println("******COULD NOT DETERMINE GAME TYPE" +game + " " + game.name);
+		}
+		if (userBalance <= 0)
+		{
+			System.out.println("Looks like you're broke...Come back again soon!");
+			NewUserView.displayView();
 		}
 		repeatPlay(game);
 		displayMainPlayerScreen();
