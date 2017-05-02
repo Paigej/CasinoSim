@@ -125,7 +125,7 @@ public class PlayerView {
 				{
 				Casino currentCasino = (Casino) currentBusiness;
 				//System.out.format(PrettyPrint.prettyPrintCasinoForPlayer(currentCasino));
-				System.out.println(PrettyPrint.prettyPrintCasinoForPlayer(currentCasino));
+				PrettyPrint.prettyPrintCasinoForPlayer(currentCasino);
 				}
 				else
 				{
@@ -190,7 +190,7 @@ public class PlayerView {
 		for (Game currentGame : casinoGames)
 		{
 			casinoGameNames.add(currentGame.name);
-			System.out.println(PrettyPrint.prettyPrintGame(currentGame));
+			PrettyPrint.prettyPrintGame(currentGame);
 		}
 		gameScreenPrompt(casinoGames, casinoGameNames);
 	}
