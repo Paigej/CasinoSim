@@ -85,6 +85,11 @@ public class NewUserView {
 		{
 			return 2;
 		}
+		else if (userSelection.toLowerCase().equals("exit"))
+		{
+		    System.exit(0);
+		    return -1;
+		}
 		else
 		{
 			System.out.println("Please type 'Log in' or 'Sign up'");
@@ -240,6 +245,7 @@ public class NewUserView {
 		if (loginOrSignup == 1)
 		{
 			getLogInInfo();
+			displayView();
 		}
 		else if (loginOrSignup == 2)
 		{
@@ -250,14 +256,20 @@ public class NewUserView {
 				OwnerView ownersScreen = new OwnerView(newUserAsOwner);
 				ownersScreen.displayManageBusinessScreen();
 				ownersScreen.displayManageBusinessOptions();
+				displayView();
 			}
 			else if (newUser instanceof Player)
 			{
 				Player newUserAsPlayer = (Player) newUser;
 				PlayerView PlayersScreen = new PlayerView(newUserAsPlayer);
 				PlayersScreen.displayMainPlayerScreen();
+				displayView();
 			}
-		}	
+		}
+		else 
+		{
+			return;
+		}
 	}
 
 }

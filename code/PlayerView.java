@@ -94,7 +94,7 @@ public class PlayerView {
 	}
 	
 
-	public void displayMainPlayerScreen ()
+	public int displayMainPlayerScreen ()
 	{
 		System.out.println("Casino Browser");
 		System.out.println("Current Worth: " +  userBalance);
@@ -119,12 +119,12 @@ public class PlayerView {
 				}
 			}
 		}
-		mainPlayerScreenPrompt(defaultBusinesses);
-
+		return mainPlayerScreenPrompt(defaultBusinesses);
+		
 	}
 	
 	//NOTE THIS SHOULD ONLY BE CALLED AFTER DISPLAYMAINPLAYERSCREEN()
-	public void mainPlayerScreenPrompt (ArrayList<Business> businesses)
+	public int mainPlayerScreenPrompt (ArrayList<Business> businesses)
 	{
 		boolean validResponse = false;
 		System.out.println("Please choose a casino to enter:");
@@ -138,12 +138,17 @@ public class PlayerView {
 				enterBusiness(businesses.get(positionInList));
 				validResponse = true;
 			}
+			else if (userSelection.toLowerCase().equals("exit"))
+			{
+				return -1;
+			}
 			else
 			{
 				System.out.println("Please type the name of one of the businesses above.");
 			}
 			
 		}
+		return -1;
 	}
 
 	private void enterBusiness(Business business) 

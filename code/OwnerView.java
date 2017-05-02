@@ -96,6 +96,10 @@ public class OwnerView
 			createBusiness();
 			return;
 		}
+		else if (userSelection.toLowerCase().equals("exit"))
+		{
+			return;
+		}
 		else
 		{
 			System.out.println("Please type 'Edit' or 'Buy'");
